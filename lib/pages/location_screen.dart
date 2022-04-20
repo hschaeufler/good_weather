@@ -23,6 +23,7 @@ class _LocationScreenState extends State<LocationScreen> {
           TextField(
             textInputAction: TextInputAction.search,
             controller: _searchController,
+            autofocus: true,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.location_on),
               border: const OutlineInputBorder(),
