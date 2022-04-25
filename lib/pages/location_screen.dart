@@ -41,41 +41,43 @@ class _LocationScreenState extends State<LocationScreen> {
                 ),
               ),
             ),
-            FutureBuilder(
-              future: futureCityList,
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
-                if (snapshot.hasError) {
-                  return const Text('Ein Fehler ist aufgetreten');
-                } else if (snapshot.hasData) {
-                  final List<City> cityList = snapshot.data!;
-                  return ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(
-                            height: 0,
-                          ),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        final City currentCity = cityList[index];
-                        return ListTile(
-                          title: Text(currentCity.name),
-                          dense: false,
-                          subtitle: currentCity.state != null
-                              ? Text(currentCity.state!)
-                              : null,
-                          leading: Text(
-                            countryCodeToFlag(currentCity.country),
-                            style: const TextStyle(fontSize: 25),
-                          ),
-                        );
-                      });
-                }
-                return const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: CircularProgressIndicator(),
-                );
-              },
-            )
+            if (futureCityList != null)
+              FutureBuilder(
+                future: futureCityList,
+                builder:
+                    (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text('Ein Fehler ist aufgetreten');
+                  } else if (snapshot.hasData &&
+                      snapshot.connectionState == ConnectionState.done) {
+                    final List<City> cityList = snapshot.data!;
+                    return ListView.separated(
+                        separatorBuilder: (context, index) => const Divider(
+                              height: 0,
+                            ),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          final City currentCity = cityList[index];
+                          return ListTile(
+                            title: Text(currentCity.name),
+                            dense: false,
+                            subtitle: currentCity.state != null
+                                ? Text(currentCity.state!)
+                                : null,
+                            leading: Text(
+                              countryCodeToFlag(currentCity.country),
+                              style: const TextStyle(fontSize: 25),
+                            ),
+                          );
+                        });
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              )
           ],
         ),
       ),
@@ -83,11 +85,12 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void _searchCity() {
-    if (_searchController.text.isNotEmpty) {
-      futureCityList =
-          GeocodingService.getCityCoordinates(_searchController.text);
-    }
-    setState(() {});
+    setState(() {
+      futureCityList = _searchController.text.isNotEmpty
+          ? GeocodingService.getCityCoordinates(_searchController.text)
+          : null;
+      print(futureCityList);
+    });
   }
 
   @override
