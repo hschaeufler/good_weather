@@ -13,6 +13,11 @@ class _LocationScreenState extends State<LocationScreen> {
   final _searchController = TextEditingController();
   Future<List<City>>? futureCityList;
 
+  String _toCountryEmoji(String countryCode) {
+    final codeUnit = countryCode.toUpperCase().split("").map((char) => 127397 + char.codeUnitAt(0));
+    return String.fromCharCodes(codeUnit);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +57,10 @@ class _LocationScreenState extends State<LocationScreen> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) => ListTile(
                           title: Text(cityList[index].name),
+                          subtitle: cityList[index].state != null
+                              ? Text(cityList[index].state!)
+                              : null,
+                          leading: Text(_toCountryEmoji(cityList[index].country)),
                         ));
               }
               return const CircularProgressIndicator();
