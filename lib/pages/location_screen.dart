@@ -47,19 +47,26 @@ class _LocationScreenState extends State<LocationScreen> {
                 return const Text('Ein Fehler ist aufgetreten');
               } else if (snapshot.hasData) {
                 final List<City> cityList = snapshot.data!;
-                return ListView.builder(
+                return ListView.separated(
+                    separatorBuilder: (context, index) => const Divider(
+                      height: 0,
+                    ),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) => ListTile(
-                          title: Text(cityList[index].name),
-                          subtitle: cityList[index].state != null
-                              ? Text(cityList[index].state!)
-                              : null,
-                          leading: Text(
-                            countryCodeToFlag(cityList[index].country),
-                            style: const TextStyle(fontSize: 25),
-                          ),
-                        ));
+                    itemBuilder: (context, index) {
+                      final City currentCity = cityList[index];
+                      return ListTile(
+                        title: Text(currentCity.name),
+                        dense: false,
+                        subtitle: currentCity.state != null
+                            ? Text(currentCity.state!)
+                            : null,
+                        leading: Text(
+                          countryCodeToFlag(currentCity.country),
+                          style: const TextStyle(fontSize: 25),
+                        ),
+                      );
+                    });
               }
               return const CircularProgressIndicator();
             },
