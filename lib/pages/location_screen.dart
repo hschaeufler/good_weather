@@ -18,7 +18,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add new Location"),
+        title: const Text("Standort hinzufügen"),
       ),
       body: Container(
         padding: const EdgeInsets.all(5),
@@ -32,7 +32,7 @@ class _LocationScreenState extends State<LocationScreen> {
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.location_on),
                 border: const OutlineInputBorder(),
-                hintText: 'Search City',
+                hintText: 'Ort eingeben',
                 suffixIcon: IconButton(
                   onPressed: _searchController.text.isNotEmpty
                       ? _searchController.clear
@@ -78,6 +78,17 @@ class _LocationScreenState extends State<LocationScreen> {
                   );
                 },
               )
+            else ...[
+              const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text("oder"),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                label: const Text("Aktuellen Standort verwenden"),
+                icon: const Icon(Icons.navigation_rounded),
+              )
+            ]
           ],
         ),
       ),
@@ -89,7 +100,6 @@ class _LocationScreenState extends State<LocationScreen> {
       futureCityList = _searchController.text.isNotEmpty
           ? GeocodingService.getCityCoordinates(_searchController.text)
           : null;
-      print(futureCityList);
     });
   }
 
