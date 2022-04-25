@@ -20,58 +20,64 @@ class _LocationScreenState extends State<LocationScreen> {
       appBar: AppBar(
         title: const Text("Add new Location"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          TextField(
-            textInputAction: TextInputAction.search,
-            controller: _searchController,
-            autofocus: true,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.location_on),
-              border: const OutlineInputBorder(),
-              hintText: 'Search City',
-              suffixIcon: IconButton(
-                onPressed: _searchController.text.isNotEmpty
-                    ? _searchController.clear
-                    : null,
-                icon: const Icon(Icons.clear),
+      body: Container(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextField(
+              textInputAction: TextInputAction.search,
+              controller: _searchController,
+              autofocus: true,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.location_on),
+                border: const OutlineInputBorder(),
+                hintText: 'Search City',
+                suffixIcon: IconButton(
+                  onPressed: _searchController.text.isNotEmpty
+                      ? _searchController.clear
+                      : null,
+                  icon: const Icon(Icons.clear),
+                ),
               ),
             ),
-          ),
-          FutureBuilder(
-            future: futureCityList,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
-              if (snapshot.hasError) {
-                return const Text('Ein Fehler ist aufgetreten');
-              } else if (snapshot.hasData) {
-                final List<City> cityList = snapshot.data!;
-                return ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(
-                      height: 0,
-                    ),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      final City currentCity = cityList[index];
-                      return ListTile(
-                        title: Text(currentCity.name),
-                        dense: false,
-                        subtitle: currentCity.state != null
-                            ? Text(currentCity.state!)
-                            : null,
-                        leading: Text(
-                          countryCodeToFlag(currentCity.country),
-                          style: const TextStyle(fontSize: 25),
-                        ),
-                      );
-                    });
-              }
-              return const CircularProgressIndicator();
-            },
-          )
-        ],
+            FutureBuilder(
+              future: futureCityList,
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Ein Fehler ist aufgetreten');
+                } else if (snapshot.hasData) {
+                  final List<City> cityList = snapshot.data!;
+                  return ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(
+                            height: 0,
+                          ),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        final City currentCity = cityList[index];
+                        return ListTile(
+                          title: Text(currentCity.name),
+                          dense: false,
+                          subtitle: currentCity.state != null
+                              ? Text(currentCity.state!)
+                              : null,
+                          leading: Text(
+                            countryCodeToFlag(currentCity.country),
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                        );
+                      });
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: CircularProgressIndicator(),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }
