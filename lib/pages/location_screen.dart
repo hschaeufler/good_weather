@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:good_weather/models/city.dart';
+import 'package:good_weather/services/geocoding_service.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
@@ -8,8 +10,8 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-
   final _searchController = TextEditingController();
+  Future<List<City>>? futureCityList;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,31 @@ class _LocationScreenState extends State<LocationScreen> {
               border: const OutlineInputBorder(),
               hintText: 'Search City',
               suffixIcon: IconButton(
-                onPressed: _searchController.text.isNotEmpty ? _searchController.clear : null,
+                onPressed: _searchController.text.isNotEmpty
+                    ? _searchController.clear
+                    : null,
                 icon: const Icon(Icons.clear),
               ),
             ),
+          ),
+          FutureBuilder(
+            future: futureCityList,
+            builder:
+                (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
+              if (snapshot.hasError) {
+                return const Text('Ein Fehler ist aufgetreten');
+              } else if (snapshot.hasData) {
+                final List<City> cityList = snapshot.data!;
+                print(cityList.length);
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) => ListTile(
+                          title: Text(cityList[index].name),
+                        ));
+              }
+              return const CircularProgressIndicator();
+            },
           )
         ],
       ),
@@ -40,7 +63,10 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void _searchCity() {
-    print(_searchController.text);
+    if (_searchController.text.isNotEmpty) {
+      futureCityList =
+          GeocodingService.getCityCoordinates(_searchController.text);
+    }
     setState(() {});
   }
 
@@ -56,4 +82,3 @@ class _LocationScreenState extends State<LocationScreen> {
     super.dispose();
   }
 }
-

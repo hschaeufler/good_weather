@@ -7,9 +7,10 @@ import '../models/city.dart';
 
 class GeocodingService {
 
-  Future<List<City>> getCityCoordinates() async {
+  static Future<List<City>> getCityCoordinates(String cityName) async {
     final serviceURI = Uri.https(Environment.apiEndpoint, Environment.geoCodeAPIPath, {
-      'appid':  Environment.apiToken
+      'appid':  Environment.apiToken,
+      'q': cityName,
     });
     final response = await http.get(serviceURI);
     if(response.statusCode == 200) {
