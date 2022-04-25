@@ -14,7 +14,7 @@ City _$CityFromJson(Map<String, dynamic> json) => City(
       lat: (json['lat'] as num).toDouble(),
       lon: (json['lon'] as num).toDouble(),
       country: json['country'] as String,
-      state: json['state'] as String,
+      state: json['state'] as String?,
     );
 
 Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{

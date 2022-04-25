@@ -9,7 +9,7 @@ class City {
   final double lat;
   final double lon;
   final String country;
-  final String state;
+  final String? state;
 
   City({
     required this.name,
@@ -17,7 +17,7 @@ class City {
     required this.lat,
     required this.lon,
     required this.country,
-    required this.state
+    this.state
   });
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
