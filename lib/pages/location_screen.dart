@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/services/geocoding_service.dart';
+import 'package:good_weather/utils/country_code_to_flag.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
@@ -12,11 +13,6 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   final _searchController = TextEditingController();
   Future<List<City>>? futureCityList;
-
-  String _toCountryEmoji(String countryCode) {
-    final codeUnit = countryCode.toUpperCase().split("").map((char) => 127397 + char.codeUnitAt(0));
-    return String.fromCharCodes(codeUnit);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +47,6 @@ class _LocationScreenState extends State<LocationScreen> {
                 return const Text('Ein Fehler ist aufgetreten');
               } else if (snapshot.hasData) {
                 final List<City> cityList = snapshot.data!;
-                print(cityList.length);
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
@@ -61,7 +56,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               ? Text(cityList[index].state!)
                               : null,
                           leading: Text(
-                              _toCountryEmoji(cityList[index].country),
+                            countryCodeToFlag(cityList[index].country),
                             style: const TextStyle(fontSize: 25),
                           ),
                         ));
