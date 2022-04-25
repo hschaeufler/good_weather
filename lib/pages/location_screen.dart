@@ -60,7 +60,10 @@ class _LocationScreenState extends State<LocationScreen> {
                           subtitle: cityList[index].state != null
                               ? Text(cityList[index].state!)
                               : null,
-                          leading: Text(_toCountryEmoji(cityList[index].country)),
+                          leading: Text(
+                              _toCountryEmoji(cityList[index].country),
+                            style: const TextStyle(fontSize: 25),
+                          ),
                         ));
               }
               return const CircularProgressIndicator();
