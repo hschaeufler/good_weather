@@ -330,6 +330,7 @@ class $CityEntityTable extends CityEntity
 abstract class _$WeatherDatabase extends GeneratedDatabase {
   _$WeatherDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $CityEntityTable cityEntity = $CityEntityTable(this);
+  late final CityDAO cityDAO = CityDAO(this as WeatherDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

@@ -69,6 +69,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               countryCodeToFlag(currentCity.country),
                               style: const TextStyle(fontSize: 25),
                             ),
+                            onTap: () => _onCitySelect(currentCity),
                           );
                         });
                   }
@@ -101,6 +102,10 @@ class _LocationScreenState extends State<LocationScreen> {
           ? GeocodingService.getCityCoordinates(_searchController.text)
           : null;
     });
+  }
+
+  void _onCitySelect(City city) {
+
   }
 
   @override
