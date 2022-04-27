@@ -7,23 +7,23 @@ part of 'weather_database.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
-class City extends DataClass implements Insertable<City> {
+class CityEntityData extends DataClass implements Insertable<CityEntityData> {
   final int id;
   final String name;
   final double lat;
   final double long;
   final String country;
   final String state;
-  City(
+  CityEntityData(
       {required this.id,
       required this.name,
       required this.lat,
       required this.long,
       required this.country,
       required this.state});
-  factory City.fromData(Map<String, dynamic> data, {String? prefix}) {
+  factory CityEntityData.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
-    return City(
+    return CityEntityData(
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       name: const StringType()
@@ -61,10 +61,10 @@ class City extends DataClass implements Insertable<City> {
     );
   }
 
-  factory City.fromJson(Map<String, dynamic> json,
+  factory CityEntityData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return City(
+    return CityEntityData(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       lat: serializer.fromJson<double>(json['lat']),
@@ -86,14 +86,14 @@ class City extends DataClass implements Insertable<City> {
     };
   }
 
-  City copyWith(
+  CityEntityData copyWith(
           {int? id,
           String? name,
           double? lat,
           double? long,
           String? country,
           String? state}) =>
-      City(
+      CityEntityData(
         id: id ?? this.id,
         name: name ?? this.name,
         lat: lat ?? this.lat,
@@ -103,7 +103,7 @@ class City extends DataClass implements Insertable<City> {
       );
   @override
   String toString() {
-    return (StringBuffer('City(')
+    return (StringBuffer('CityEntityData(')
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('lat: $lat, ')
@@ -119,7 +119,7 @@ class City extends DataClass implements Insertable<City> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is City &&
+      (other is CityEntityData &&
           other.id == this.id &&
           other.name == this.name &&
           other.lat == this.lat &&
@@ -128,7 +128,7 @@ class City extends DataClass implements Insertable<City> {
           other.state == this.state);
 }
 
-class CityEntityCompanion extends UpdateCompanion<City> {
+class CityEntityCompanion extends UpdateCompanion<CityEntityData> {
   final Value<int> id;
   final Value<String> name;
   final Value<double> lat;
@@ -155,7 +155,7 @@ class CityEntityCompanion extends UpdateCompanion<City> {
         long = Value(long),
         country = Value(country),
         state = Value(state);
-  static Insertable<City> custom({
+  static Insertable<CityEntityData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<double>? lat,
@@ -229,7 +229,7 @@ class CityEntityCompanion extends UpdateCompanion<City> {
 }
 
 class $CityEntityTable extends CityEntity
-    with TableInfo<$CityEntityTable, City> {
+    with TableInfo<$CityEntityTable, CityEntityData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -273,7 +273,7 @@ class $CityEntityTable extends CityEntity
   @override
   String get actualTableName => 'city_entity';
   @override
-  VerificationContext validateIntegrity(Insertable<City> instance,
+  VerificationContext validateIntegrity(Insertable<CityEntityData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -316,8 +316,8 @@ class $CityEntityTable extends CityEntity
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  City map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return City.fromData(data,
+  CityEntityData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return CityEntityData.fromData(data,
         prefix: tablePrefix != null ? '$tablePrefix.' : null);
   }
 
