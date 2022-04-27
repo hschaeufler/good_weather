@@ -37,8 +37,10 @@ dependencies:
   http: ^0.13.4
   flutter_dotenv: ^5.0.2
   json_annotation: ^4.4.0
-  sqflite: ^2.0.2+1
   path: ^1.8.0
+  drift: ^1.5.0
+  sqlite3_flutter_libs: ^0.5.5
+  path_provider: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.1.10
   json_serializable: ^6.1.6
+  drift_dev: ^1.5.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
