@@ -12,6 +12,7 @@ class CityDAO extends DatabaseAccessor<WeatherDatabase> with _$CityDAOMixin {
 
   CityDAO(WeatherDatabase db) : super(db);
 
-  Future<void> insertCity(CityEntityData city) => into(cityEntity).insert(city);
+  Future<int> insertCity(CityEntityCompanion city) => into(cityEntity).insert(city);
+  Future<List<CityEntityData>> get allCities => select(cityEntity).get();
 
 }

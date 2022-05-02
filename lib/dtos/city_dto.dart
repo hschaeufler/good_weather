@@ -1,6 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 
-class City {
-  final int? id;
+part 'city_dto.g.dart';
+
+@JsonSerializable()
+class CityDTO {
   final String name;
   final Map<String, String>? local_names;
   final double lat;
@@ -8,8 +11,7 @@ class City {
   final String country;
   final String? state;
 
-  City({
-    this.id,
+  CityDTO({
     required this.name,
     this.local_names,
     required this.lat,
@@ -17,4 +19,7 @@ class City {
     required this.country,
     this.state
   });
+
+  factory CityDTO.fromJson(Map<String, dynamic> json) => _$CityDTOFromJson(json);
+  Map<String, dynamic> toJson() => _$CityDTOToJson(this);
 }

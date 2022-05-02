@@ -6,5 +6,5 @@ class CityEntity extends Table {
   RealColumn get lat => real()();
   RealColumn get long => real()();
   TextColumn get country => text()();
-  TextColumn get state => text()();
+  TextColumn get state => text().nullable()();
 }

@@ -13,14 +13,14 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
   final double lat;
   final double long;
   final String country;
-  final String state;
+  final String? state;
   CityEntityData(
       {required this.id,
       required this.name,
       required this.lat,
       required this.long,
       required this.country,
-      required this.state});
+      this.state});
   factory CityEntityData.fromData(Map<String, dynamic> data, {String? prefix}) {
     final effectivePrefix = prefix ?? '';
     return CityEntityData(
@@ -35,7 +35,7 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
       country: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}country'])!,
       state: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}state'])!,
+          .mapFromDatabaseResponse(data['${effectivePrefix}state']),
     );
   }
   @override
@@ -46,7 +46,9 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
     map['lat'] = Variable<double>(lat);
     map['long'] = Variable<double>(long);
     map['country'] = Variable<String>(country);
-    map['state'] = Variable<String>(state);
+    if (!nullToAbsent || state != null) {
+      map['state'] = Variable<String?>(state);
+    }
     return map;
   }
 
@@ -57,7 +59,8 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
       lat: Value(lat),
       long: Value(long),
       country: Value(country),
-      state: Value(state),
+      state:
+          state == null && nullToAbsent ? const Value.absent() : Value(state),
     );
   }
 
@@ -70,7 +73,7 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
       lat: serializer.fromJson<double>(json['lat']),
       long: serializer.fromJson<double>(json['long']),
       country: serializer.fromJson<String>(json['country']),
-      state: serializer.fromJson<String>(json['state']),
+      state: serializer.fromJson<String?>(json['state']),
     );
   }
   @override
@@ -82,7 +85,7 @@ class CityEntityData extends DataClass implements Insertable<CityEntityData> {
       'lat': serializer.toJson<double>(lat),
       'long': serializer.toJson<double>(long),
       'country': serializer.toJson<String>(country),
-      'state': serializer.toJson<String>(state),
+      'state': serializer.toJson<String?>(state),
     };
   }
 
@@ -134,7 +137,7 @@ class CityEntityCompanion extends UpdateCompanion<CityEntityData> {
   final Value<double> lat;
   final Value<double> long;
   final Value<String> country;
-  final Value<String> state;
+  final Value<String?> state;
   const CityEntityCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -149,19 +152,18 @@ class CityEntityCompanion extends UpdateCompanion<CityEntityData> {
     required double lat,
     required double long,
     required String country,
-    required String state,
+    this.state = const Value.absent(),
   })  : name = Value(name),
         lat = Value(lat),
         long = Value(long),
-        country = Value(country),
-        state = Value(state);
+        country = Value(country);
   static Insertable<CityEntityData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<double>? lat,
     Expression<double>? long,
     Expression<String>? country,
-    Expression<String>? state,
+    Expression<String?>? state,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -179,7 +181,7 @@ class CityEntityCompanion extends UpdateCompanion<CityEntityData> {
       Value<double>? lat,
       Value<double>? long,
       Value<String>? country,
-      Value<String>? state}) {
+      Value<String?>? state}) {
     return CityEntityCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -209,7 +211,7 @@ class CityEntityCompanion extends UpdateCompanion<CityEntityData> {
       map['country'] = Variable<String>(country.value);
     }
     if (state.present) {
-      map['state'] = Variable<String>(state.value);
+      map['state'] = Variable<String?>(state.value);
     }
     return map;
   }
@@ -264,8 +266,8 @@ class $CityEntityTable extends CityEntity
   final VerificationMeta _stateMeta = const VerificationMeta('state');
   @override
   late final GeneratedColumn<String?> state = GeneratedColumn<String?>(
-      'state', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      'state', aliasedName, true,
+      type: const StringType(), requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [id, name, lat, long, country, state];
   @override
@@ -307,8 +309,6 @@ class $CityEntityTable extends CityEntity
     if (data.containsKey('state')) {
       context.handle(
           _stateMeta, state.isAcceptableOrUnknown(data['state']!, _stateMeta));
-    } else if (isInserting) {
-      context.missing(_stateMeta);
     }
     return context;
   }
