@@ -1,8 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:good_weather/pages/location_page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:good_weather/pages/location_screen.dart';
 import 'package:good_weather/pages/weather_page.dart';
+import 'package:good_weather/utils/environment.dart';
 
-void main() {
+Future<void> main() async {
+
+  await dotenv.load(
+    fileName: Environment.envFileName,
+  );
   runApp(const MyApp());
 }
 
@@ -29,7 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const WeatherPage(),
-        '/addlocation': (context) => const LocationPage(),
+        '/addlocation': (context) => const LocationScreen(),
       },
     );
   }
