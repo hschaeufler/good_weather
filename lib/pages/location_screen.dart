@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:good_weather/services/geocoding_api_client.dart';
+import 'package:good_weather/repositories/city_repository.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
-
-import '../dtos/city_dto.dart';
+import '../models/city.dart';
 
 class LocationScreen extends StatefulWidget {
+
   const LocationScreen({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +13,9 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   final _searchController = TextEditingController();
-  Future<List<CityDTO>>? futureCityList;
+  final _cityRepository = CityRepository();
+
+  Future<List<City>>? futureCityList;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,12 @@ class _LocationScreenState extends State<LocationScreen> {
               FutureBuilder(
                 future: futureCityList,
                 builder:
-                    (BuildContext context, AsyncSnapshot<List<CityDTO>> snapshot) {
+                    (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Ein Fehler ist aufgetreten');
                   } else if (snapshot.hasData &&
                       snapshot.connectionState == ConnectionState.done) {
-                    final List<CityDTO> cityList = snapshot.data!;
+                    final List<City> cityList = snapshot.data!;
                     return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(
                               height: 0,
@@ -59,7 +61,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          final CityDTO currentCity = cityList[index];
+                          final City currentCity = cityList[index];
                           return ListTile(
                             title: Text(currentCity.name),
                             dense: false,
@@ -100,13 +102,14 @@ class _LocationScreenState extends State<LocationScreen> {
   void _searchCity() {
     setState(() {
       futureCityList = _searchController.text.isNotEmpty
-          ? GeocodingAPIClient.getCityCoordinates(_searchController.text)
+          ? _cityRepository.findCity(_searchController.text)
           : null;
     });
   }
 
-  void _onCitySelect(CityDTO city) {
-
+  Future<void> _onCitySelect(City city) async {
+    final id = await _cityRepository.addCity(city);
+    print(id);
   }
 
   @override
