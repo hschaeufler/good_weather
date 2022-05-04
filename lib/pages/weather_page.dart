@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:good_weather/repositories/city_repository.dart';
 
-class WeatherPage extends StatelessWidget {
-  const WeatherPage({Key? key}) : super(key: key);
+import '../models/city.dart';
+
+class WeatherPage extends StatefulWidget {
+
+  const WeatherPage({Key? key, this.cityid}) : super(key: key);
+
+  final int? cityid;
+
+  @override
+  State<WeatherPage> createState() => _WeatherPageState();
+}
+
+class _WeatherPageState extends State<WeatherPage> {
+
+  final CityRepository _cityRepository = CityRepository();
+
+  Future<City?>? city;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +31,22 @@ class WeatherPage extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _onAddLocation(context),
+        onPressed: () => context.go('/addlocation'),
         tooltip: 'Add Location',
         child: const Icon(Icons.add_location),
       ),
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    if(widget.cityid != null) {
+      city = _cityRepository.getById(widget.cityid!);
+    }
+  }
+
   void _onAddLocation(context) {
-    Navigator.pushNamed(context, '/addlocation');
+    context.go('/addlocation');
   }
 }

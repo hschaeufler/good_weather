@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:good_weather/dtos/city_dto.dart';
+import 'package:good_weather/dtos/geocoding/city_dto.dart';
 import 'package:good_weather/utils/environment.dart';
 import 'package:http/http.dart' as http;
 

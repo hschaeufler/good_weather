@@ -1,11 +1,12 @@
-import 'package:good_weather/dtos/city_dto.dart';
+import 'package:good_weather/apiclients/geocoding_api_client.dart';
+import 'package:good_weather/dtos/geocoding/city_dto.dart';
 import 'package:good_weather/mapper/city_to_entity_mapper.dart';
 import 'package:good_weather/mapper/dto_to_city_mapper.dart';
 import 'package:good_weather/mapper/entity_to_city_mapper.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/repositories/i_city_repository.dart';
 import '../persistance/weather_database.dart';
-import '../services/geocoding_api_client.dart';
+
 
 class CityRepository implements ICityRepository {
 

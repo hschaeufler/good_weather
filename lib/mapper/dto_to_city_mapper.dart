@@ -1,4 +1,4 @@
-import 'package:good_weather/dtos/city_dto.dart';
+import 'package:good_weather/dtos/geocoding/city_dto.dart';
 import 'package:good_weather/mapper/i_mapper.dart';
 import 'package:good_weather/models/city.dart';
 

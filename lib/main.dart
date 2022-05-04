@@ -1,26 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
 import 'package:good_weather/pages/location_screen.dart';
 import 'package:good_weather/pages/weather_page.dart';
 import 'package:good_weather/utils/environment.dart';
 
 Future<void> main() async {
-
   await dotenv.load(
     fileName: Environment.envFileName,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      routeInformationParser: _router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
+      title: 'Weather App',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,11 +34,28 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const WeatherPage(),
-        '/addlocation': (context) => const LocationScreen(),
-      },
     );
   }
+
+  final GoRouter _router = GoRouter(
+    initialLocation: '/',
+    routes: <GoRoute>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WeatherPage(),
+      ),
+      GoRoute(
+          path: '/weather/:cityid',
+          builder: (BuildContext context, GoRouterState state) {
+            String cityId = state.params['cityid']!;
+            return const WeatherPage();
+          }),
+      GoRoute(
+        path: '/addlocation',
+        builder: (BuildContext context, GoRouterState state) =>
+            const LocationScreen(),
+      ),
+    ],
+  );
 }
