@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class WeatherAPIClient {
 
-  static Future<List<WeatherDataDTO>> getWeather(double longitude, double latitude,{units = "metric", lang = "de"}) async {
+  static Future<WeatherDataDTO> getWeather(double longitude, double latitude,{units = "metric", lang = "de"}) async {
     final serviceURI = Uri.https(Environment.apiEndpoint, Environment.weatherAPIPath, {
       'appid':  Environment.apiToken,
       'lon': longitude,
@@ -14,9 +14,9 @@ class WeatherAPIClient {
     });
     final response = await http.get(serviceURI);
     if(response.statusCode == 200) {
-      final List jsonList = jsonDecode(response.body);
-      List<WeatherDataDTO> cityList = List<WeatherDataDTO>.from(jsonList.map((e) => WeatherDataDTO.fromJson(e)));
-      return cityList;
+      final Map<String, dynamic> jsonList = jsonDecode(response.body);
+      WeatherDataDTO weather = WeatherDataDTO.fromJson(jsonList);
+      return weather;
     } else {
       throw Exception("Webservice-Fault " + response.body);
     }

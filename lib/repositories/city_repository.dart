@@ -39,12 +39,13 @@ class CityRepository implements ICityRepository {
   }
 
   @override
-  Future<City?> getById(int id) async {
+  Future<City> getById(int id) async {
     City? city;
     CityEntityData? cityEntity = await _dao.getById(id);
-    if(cityEntity != null) {
-      city = _entityToCityMapper.map(cityEntity);
+    if(cityEntity == null) {
+      throw Exception("No City for this id");
     }
+    city = _entityToCityMapper.map(cityEntity);
     return city;
   }
 
