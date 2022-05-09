@@ -6,11 +6,12 @@ class DtoToWeatherDataMapper implements IMapper<WeatherDataDTO, WeatherData> {
   @override
   WeatherData map(WeatherDataDTO source) {
     return WeatherData(
-        iconName: source.weather[0].icon,
-        description: source.weather[0].description,
-        temp: source.main.temp,
-        minTemp: source.main.temp_min,
-        maxTemp: source.main.temp_max);
+      iconName: source.weather[0].icon,
+      description: source.weather[0].description,
+      temp: source.main.temp,
+      minTemp: source.main.temp_min,
+      maxTemp: source.main.temp_max,
+      cityName: source.name,
+    );
   }
-
 }

@@ -4,11 +4,13 @@ class WeatherData {
   final double temp;
   final double? minTemp;
   final double? maxTemp;
+  final String cityName;
 
   WeatherData(
       {required this.iconName,
       required this.description,
       required this.temp,
       this.minTemp,
-      this.maxTemp});
+      this.maxTemp,
+      required this.cityName});
 }
