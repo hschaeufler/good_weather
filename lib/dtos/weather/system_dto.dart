@@ -7,7 +7,7 @@ part 'system_dto.g.dart';
 class SystemDTO {
   final int type;
   final int id;
-  final double message;
+  final double? message;
   final String country;
   final int sunrise;
   final int sunset;

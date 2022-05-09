@@ -9,7 +9,7 @@ part of 'system_dto.dart';
 SystemDTO _$SystemDTOFromJson(Map<String, dynamic> json) => SystemDTO(
       type: json['type'] as int,
       id: json['id'] as int,
-      message: (json['message'] as num).toDouble(),
+      message: (json['message'] as num?)?.toDouble(),
       country: json['country'] as String,
       sunrise: json['sunrise'] as int,
       sunset: json['sunset'] as int,
