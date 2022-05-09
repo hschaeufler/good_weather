@@ -7,6 +7,9 @@ class Environment {
   static String get apiEndpoint => dotenv.env['API_ENDPOINT'] ?? '';
   static String get geoCodeAPIPath => dotenv.env['GEOCODE_API_PATH'] ?? '';
   static String get weatherAPIPath => dotenv.env['WEATHER_API_PATH'] ?? '';
+  static String get iconBaseURL => dotenv.env['ICON_SERVICE_URL'] ?? '';
+  static String get protocolPrefix => dotenv.env['PROTOCOL_PREFIX'] ?? '';
   static String get geoCodeBaseURL => apiEndpoint + geoCodeAPIPath;
   static String get weatherBaseURL => apiEndpoint + geoCodeAPIPath;
+  static String iconURL(String iconName) => iconBaseURL.replaceFirst("[iconName]", iconName);
 }
