@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:good_weather/models/weather_data.dart';
 import 'package:good_weather/repositories/city_repository.dart';
 import 'package:good_weather/repositories/weather_repository.dart';
+import 'package:good_weather/widgets/weather.dart';
+import 'package:good_weather/widgets/weather_icon.dart';
 
 
 class WeatherPage extends StatefulWidget {
-  const WeatherPage({Key? key, this.cityId}) : super(key: key);
+  const WeatherPage({this.cityId, Key? key}) : super(key: key);
 
   final int? cityId;
 
@@ -34,29 +36,36 @@ class _WeatherPageState extends State<WeatherPage> {
       body: FutureBuilder(
         future: weatherData,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if(snapshot.hasData) {
-
+          if (snapshot.hasError) {
+            return Text(snapshot.error!.toString());
+          } else if(snapshot.hasData) {
+              WeatherData weather = snapshot.data;
+              return Weather(weatherData: weather);
           }
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         },),
     );
+  }
+  _fetchWeatherData() {
+    if(widget.cityId != null) {
+      weatherData = _cityRepository
+          .getById(widget.cityId!)
+          .then((city) => _weatherRepository.getCurrentWeather(city));
+    }
   }
 
   @override
   void initState() {
     super.initState();
-
+    _fetchWeatherData();
   }
+
 
   @override
   void didUpdateWidget(WeatherPage oldWidget) {
-    print(widget.cityId);
-    print("test");
     super.didUpdateWidget(oldWidget);
-    if(oldWidget.cityId != widget.cityId && widget.cityId != null) {
-      weatherData = _cityRepository
-          .getById(widget.cityId!)
-          .then((city) => _weatherRepository.getCurrentWeather(city));
+    if(oldWidget.cityId != widget.cityId) {
+      _fetchWeatherData();
     }
   }
 
