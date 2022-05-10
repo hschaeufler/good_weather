@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:good_weather/repositories/city_repository.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
 import '../models/city.dart';
@@ -72,7 +73,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               countryCodeToFlag(currentCity.country),
                               style: const TextStyle(fontSize: 25),
                             ),
-                            onTap: () => _onCitySelect(currentCity),
+                            onTap: () => _onCitySelect(currentCity, context),
                           );
                         });
                   }
@@ -107,9 +108,9 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
-  Future<void> _onCitySelect(City city) async {
+  Future<void> _onCitySelect(City city, BuildContext context) async {
     final id = await _cityRepository.addCity(city);
-    print(id);
+    GoRouter.of(context).go("/weather/$id");
   }
 
   @override

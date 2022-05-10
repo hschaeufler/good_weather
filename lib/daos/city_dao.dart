@@ -11,8 +11,20 @@ class CityDAO extends DatabaseAccessor<WeatherDatabase> with _$CityDAOMixin {
 
   Future<int> insertCity(CityEntityCompanion city) =>
       into(cityEntity).insert(city);
+
   Future<List<CityEntityData>> get allCities => select(cityEntity).get();
+
+  Stream<List<CityEntityData>> get watchCities => select(cityEntity).watch();
+
   Future<CityEntityData?> getById(int id) {
     return (select(cityEntity)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  }
+
+  Future<int> deleteById(int id) {
+    return (delete(cityEntity)..where((tbl) => tbl.id.equals(id))).go();
+  }
+
+  Future<int> deleteAll() {
+    return delete(cityEntity).go();
   }
 }
