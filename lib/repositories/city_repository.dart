@@ -57,5 +57,18 @@ class CityRepository implements ICityRepository {
     return cityList;
   }
 
+  @override
+  Future<int> deleteAllCities() {
+    return _dao.deleteAll();
+  }
+
+  @override
+  Future<int> deleteCity(City city) {
+    if(city.id == null) {
+      throw Exception("Only Citys with Id, can get deleted!");
+    }
+    return _dao.deleteById(city.id!);
+  }
+
 
 }

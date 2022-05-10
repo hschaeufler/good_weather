@@ -5,4 +5,6 @@ abstract class ICityRepository {
   Future<City> getById(int id);
   Future<int> addCity(City city);
   Future<List<City>> findCity(String cityName);
+  Future<int> deleteCity(City city);
+  Future<int> deleteAllCities();
 }
