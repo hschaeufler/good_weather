@@ -42,7 +42,10 @@ class _WeatherPageState extends State<WeatherPage> {
             WeatherData weather = snapshot.data;
             return RefreshIndicator(
                 child: ListView(
-                  children: [Weather(weatherData: weather)],
+                  children: [Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Weather(weatherData: weather),
+                  )],
                 ),
                 onRefresh: () async {
                   _fetchWeatherData();
