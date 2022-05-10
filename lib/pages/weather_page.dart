@@ -127,8 +127,18 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   _fetchInitialData() {
-    _fetchWeatherData();
     _fetchCities();
+    if (widget.cityId != null) {
+      _fetchWeatherData();
+    } else {
+      cities?.then((cities) {
+        if (cities.isEmpty) {
+          GoRouter.of(context).go("/addlocation");
+        } else {
+          GoRouter.of(context).go("/weather/${cities[0].id}");
+        }
+      });
+    }
   }
 
   @override
@@ -141,8 +151,7 @@ class _WeatherPageState extends State<WeatherPage> {
   void didUpdateWidget(WeatherPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.cityId != widget.cityId) {
-      _fetchWeatherData();
+      _fetchInitialData();
     }
-    _fetchCities();
   }
 }
