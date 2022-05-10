@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:good_weather/dtos/weather/weather_data_dto.dart';
 
 import '../utils/environment.dart';
