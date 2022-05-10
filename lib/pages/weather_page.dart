@@ -45,10 +45,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   children: [Weather(weatherData: weather)],
                 ),
                 onRefresh: () async {
-                  setState(() {
-                    _fetchWeatherData();
-                  });
-                  return;
+                  _fetchWeatherData();
                 });
           }
           return const Center(child: CircularProgressIndicator());
@@ -78,7 +75,9 @@ class _WeatherPageState extends State<WeatherPage> {
                       ),
                     ),
                   ),
-                  direction: DismissDirection.endToStart,
+                  direction: cityList.length > 1
+                      ? DismissDirection.endToStart
+                      : DismissDirection.none,
                   key: ValueKey<int>(currentCity.id!),
                   child: CityTile(
                     city: currentCity,
@@ -104,16 +103,22 @@ class _WeatherPageState extends State<WeatherPage> {
 
   _fetchWeatherData() {
     if (widget.cityId != null) {
-      weatherData = _weatherService.getWeatherByCityId(widget.cityId!);
+      setState(() {
+        weatherData = _weatherService.getWeatherByCityId(widget.cityId!);
+      });
     }
   }
 
   _fetchCities() {
-    cities = _weatherService.getAllCities();
+    setState(() {
+      cities = _weatherService.getAllCities();
+    });
   }
 
   _deleteCity(City city) {
-    cities = _weatherService.deleteCity(city);
+    setState(() {
+      cities = _weatherService.deleteCity(city);
+    });
   }
 
   _onCitySelected(City city, BuildContext context) {
