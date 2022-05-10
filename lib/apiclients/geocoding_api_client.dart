@@ -7,11 +7,12 @@ import 'package:http/http.dart' as http;
 
 class GeocodingAPIClient {
 
-  static Future<List<CityDTO>> getCityCoordinates(String cityName,{limit = 5}) async {
+  static Future<List<CityDTO>> getCityCoordinates(String cityName,{limit = 5, lang = "de"}) async {
     final serviceURI = Uri.https(Environment.apiEndpoint, Environment.geoCodeAPIPath, {
       'appid':  Environment.apiToken,
       'q': cityName,
       'limit': limit.toString(),
+      'lang': lang,
     });
     final response = await http.get(serviceURI);
     if(response.statusCode == 200) {
