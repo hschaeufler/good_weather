@@ -48,9 +48,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
           path: '/weather/:cityid',
           builder: (BuildContext context, GoRouterState state) {
-            print("fuck!");
             int? cityId = state.params['cityid'] != null ? int.parse(state.params['cityid']!) : null;
-            print(cityId);
             return WeatherPage(cityId: cityId);
           }),
       GoRoute(

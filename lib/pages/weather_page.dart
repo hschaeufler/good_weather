@@ -42,13 +42,13 @@ class _WeatherPageState extends State<WeatherPage> {
             WeatherData weather = snapshot.data;
             return RefreshIndicator(
                 child: ListView(
-                  children: [Weather(weatherData: weather)],
+                  children: [Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Weather(weatherData: weather),
+                  )],
                 ),
                 onRefresh: () async {
-                  setState(() {
-                    _fetchWeatherData();
-                  });
-                  return;
+                  _fetchWeatherData();
                 });
           }
           return const Center(child: CircularProgressIndicator());
@@ -78,7 +78,9 @@ class _WeatherPageState extends State<WeatherPage> {
                       ),
                     ),
                   ),
-                  direction: DismissDirection.endToStart,
+                  direction: cityList.length > 1
+                      ? DismissDirection.endToStart
+                      : DismissDirection.none,
                   key: ValueKey<int>(currentCity.id!),
                   child: CityTile(
                     city: currentCity,
@@ -104,16 +106,22 @@ class _WeatherPageState extends State<WeatherPage> {
 
   _fetchWeatherData() {
     if (widget.cityId != null) {
-      weatherData = _weatherService.getWeatherByCityId(widget.cityId!);
+      setState(() {
+        weatherData = _weatherService.getWeatherByCityId(widget.cityId!);
+      });
     }
   }
 
   _fetchCities() {
-    cities = _weatherService.getAllCities();
+    setState(() {
+      cities = _weatherService.getAllCities();
+    });
   }
 
   _deleteCity(City city) {
-    cities = _weatherService.deleteCity(city);
+    setState(() {
+      cities = _weatherService.deleteCity(city);
+    });
   }
 
   _onCitySelected(City city, BuildContext context) {
@@ -122,8 +130,18 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   _fetchInitialData() {
-    _fetchWeatherData();
     _fetchCities();
+    if (widget.cityId != null) {
+      _fetchWeatherData();
+    } else {
+      cities?.then((cities) {
+        if (cities.isEmpty) {
+          GoRouter.of(context).go("/addlocation");
+        } else {
+          GoRouter.of(context).go("/weather/${cities[0].id}");
+        }
+      });
+    }
   }
 
   @override
@@ -136,8 +154,7 @@ class _WeatherPageState extends State<WeatherPage> {
   void didUpdateWidget(WeatherPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.cityId != widget.cityId) {
-      _fetchWeatherData();
+      _fetchInitialData();
     }
-    _fetchCities();
   }
 }

@@ -5,8 +5,8 @@ part 'system_dto.g.dart';
 
 @JsonSerializable()
 class SystemDTO {
-  final int type;
-  final int id;
+  final int? type;
+  final int? id;
   final double? message;
   final String country;
   final int sunrise;
