@@ -84,7 +84,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   key: ValueKey<int>(currentCity.id!),
                   child: CityTile(
                     city: currentCity,
-                    onTap: () => _onCitySelected(currentCity, context),
+                    onTap: () => _onCitySelected(currentCity),
                   ),
                   onDismissed: (direction) => _deleteCity(currentCity),
                 );
@@ -124,7 +124,7 @@ class _WeatherPageState extends State<WeatherPage> {
     });
   }
 
-  _onCitySelected(City city, BuildContext context) {
+  _onCitySelected(City city) {
     Navigator.of(context).pop();
     GoRouter.of(context).go("/weather/${city.id}");
   }

@@ -5,7 +5,6 @@ import 'package:good_weather/utils/country_code_to_flag.dart';
 import '../models/city.dart';
 
 class LocationScreen extends StatefulWidget {
-
   const LocationScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +22,12 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Standort hinzufügen"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            _goBack();
+          },
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(5),
@@ -73,7 +78,7 @@ class _LocationScreenState extends State<LocationScreen> {
                               countryCodeToFlag(currentCity.country),
                               style: const TextStyle(fontSize: 25),
                             ),
-                            onTap: () => _onCitySelect(currentCity, context),
+                            onTap: () => _onCitySelect(currentCity),
                           );
                         });
                   }
@@ -108,7 +113,11 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
-  Future<void> _onCitySelect(City city, BuildContext context) async {
+  void _goBack() {
+    GoRouter.of(context).go("/");
+  }
+
+  Future<void> _onCitySelect(City city) async {
     final id = await _cityRepository.addCity(city);
     GoRouter.of(context).go("/weather/$id");
   }
