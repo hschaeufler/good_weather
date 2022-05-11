@@ -4,14 +4,14 @@ import 'package:good_weather/repositories/city_repository.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
 import '../models/city.dart';
 
-class LocationScreen extends StatefulWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+class LocationPage extends StatefulWidget {
+  const LocationPage({Key? key}) : super(key: key);
 
   @override
-  State<LocationScreen> createState() => _LocationScreenState();
+  State<LocationPage> createState() => _LocationPageState();
 }
 
-class _LocationScreenState extends State<LocationScreen> {
+class _LocationPageState extends State<LocationPage> {
   final _searchController = TextEditingController();
   final _cityRepository = CityRepository();
 

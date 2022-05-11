@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/models/city.dart';
-import 'package:good_weather/models/weather_data.dart';
+import 'package:good_weather/pages/city_weather_page.dart';
 import 'package:good_weather/services/weather_service.dart';
-import 'package:good_weather/widgets/city_drawer.dart';
-import 'package:good_weather/widgets/weather.dart';
 
-class WeatherPage extends StatefulWidget {
-  const WeatherPage({this.cityId, Key? key}) : super(key: key);
+import '../widgets/city_drawer.dart';
+
+class WeatherOverviewPage extends StatefulWidget {
+  const WeatherOverviewPage({this.cityId, Key? key}) : super(key: key);
 
   final int? cityId;
 
   @override
-  State<WeatherPage> createState() => _WeatherPageState();
+  State<WeatherOverviewPage> createState() => _WeatherOverviewPageState();
 }
 
-class _WeatherPageState extends State<WeatherPage> {
+class _WeatherOverviewPageState extends State<WeatherOverviewPage> {
   final WeatherService _weatherService = WeatherService();
+  final PageController _controller = PageController();
 
-  Future<WeatherData>? weatherData;
   Future<List<City>>? cities;
 
   @override
@@ -33,24 +33,19 @@ class _WeatherPageState extends State<WeatherPage> {
           child: const Icon(Icons.add_location),
         ),
         body: FutureBuilder(
-          future: weatherData,
+          future: cities,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasError) {
               return Text(snapshot.error!.toString());
             } else if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
-              WeatherData weather = snapshot.data;
-              return RefreshIndicator(
-                  child: ListView(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Weather(weatherData: weather),
-                      )
-                    ],
-                  ),
-                  onRefresh: () async {
-                    _fetchWeatherData();
+              final List<City> cityList = snapshot.data;
+              return PageView.builder(
+                  itemCount: cityList.length,
+                  controller: _controller,
+                  itemBuilder: (BuildContext context, int index) {
+                    final City city = cityList[index];
+                    return CityWeatherPage(city: city);
                   });
             }
             return const Center(child: CircularProgressIndicator());
@@ -61,14 +56,6 @@ class _WeatherPageState extends State<WeatherPage> {
           onCitySelected: _onCitySelected,
           onCityDeleted: _deleteCity,
         ));
-  }
-
-  _fetchWeatherData() {
-    if (widget.cityId != null) {
-      setState(() {
-        weatherData = _weatherService.getWeatherByCityId(widget.cityId!);
-      });
-    }
   }
 
   _fetchCities() {
@@ -88,32 +75,26 @@ class _WeatherPageState extends State<WeatherPage> {
     GoRouter.of(context).go("/weather/${city.id}");
   }
 
-  _fetchInitialData() {
-    _fetchCities();
-    if (widget.cityId != null) {
-      _fetchWeatherData();
-    } else {
-      cities?.then((cities) {
-        if (cities.isEmpty) {
-          GoRouter.of(context).go("/addlocation");
-        } else {
-          GoRouter.of(context).go("/weather/${cities[0].id}");
-        }
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _fetchInitialData();
+    _fetchCities();
   }
 
   @override
-  void didUpdateWidget(WeatherPage oldWidget) {
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(WeatherOverviewPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.cityId != widget.cityId) {
-      _fetchInitialData();
+    if (widget.cityId != null) {
+      cities?.then((List<City> cityList) {
+        int id = cityList.indexWhere((city) => city.id == widget.cityId);
+        _controller.jumpToPage(id);
+      });
     }
   }
 }

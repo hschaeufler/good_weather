@@ -16,6 +16,10 @@ class WeatherService {
   final CityRepository _cityRepository = CityRepository();
   final WeatherRepository _weatherRepository = WeatherRepository();
 
+  Future<WeatherData> getWeather(City city) {
+    return _weatherRepository.getCurrentWeather(city);
+  }
+
   Future<WeatherData> getWeatherByCityId(int cityId) {
     return _cityRepository
         .getById(cityId)
