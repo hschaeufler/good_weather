@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:good_weather/repositories/city_repository.dart';
+import 'package:good_weather/services/weather_service.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
 import '../models/city.dart';
 
@@ -13,7 +13,7 @@ class LocationPage extends StatefulWidget {
 
 class _LocationPageState extends State<LocationPage> {
   final _searchController = TextEditingController();
-  final _cityRepository = CityRepository();
+  final _weatherService = WeatherService();
 
   Future<List<City>>? futureCityList;
 
@@ -94,7 +94,9 @@ class _LocationPageState extends State<LocationPage> {
                 child: Text("oder"),
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  _onAddLocation();
+                },
                 label: const Text("Aktuellen Standort verwenden"),
                 icon: const Icon(Icons.navigation_rounded),
               )
@@ -108,7 +110,7 @@ class _LocationPageState extends State<LocationPage> {
   void _searchCity() {
     setState(() {
       futureCityList = _searchController.text.isNotEmpty
-          ? _cityRepository.findCity(_searchController.text)
+          ? _weatherService.findCityByName(_searchController.text)
           : null;
     });
   }
@@ -118,8 +120,26 @@ class _LocationPageState extends State<LocationPage> {
   }
 
   Future<void> _onCitySelect(City city) async {
-    final id = await _cityRepository.addCity(city);
+    final id = await _weatherService.addCity(city);
     GoRouter.of(context).go("/weather/$id");
+  }
+
+  Future<void> _onAddLocation() async {
+    _weatherService
+        .addCityByLocation()
+        .then((id) => GoRouter.of(context).go("/weather/$id"))
+        .catchError((error) {
+          print(error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+          action: SnackBarAction(
+            label: 'OK',
+            onPressed: () {},
+          ),
+        ),
+      );
+    });
   }
 
   @override

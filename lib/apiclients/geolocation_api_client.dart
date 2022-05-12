@@ -3,12 +3,11 @@ import 'package:geolocator/geolocator.dart';
 class GeolocationApiClient {
 
   //Code mostly from https://pub.dev/packages/geolocator
-  static Future<Position> getCurrentPosition() async {
+  static Future<Position> getCurrentPosition({waitInSeconds = 10}) async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('Location Service is disabled!');
     }
-
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -21,7 +20,6 @@ class GeolocationApiClient {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-
-    return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(timeLimit: Duration(seconds: waitInSeconds));
   }
 }
