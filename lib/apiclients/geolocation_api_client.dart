@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 class GeolocationApiClient {
 
   //Code mostly from https://pub.dev/packages/geolocator
-  Future<Position> getCurrentPosition() async {
+  static Future<Position> getCurrentPosition() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error('Location Service is disabled!');
