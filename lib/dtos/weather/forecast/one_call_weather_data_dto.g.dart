@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weather_data_dto.dart';
+part of 'one_call_weather_data_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeatherDataDTO _$WeatherDataDTOFromJson(Map<String, dynamic> json) =>
-    WeatherDataDTO(
+OneCallWeatherDataDTO _$OneCallWeatherDataDTOFromJson(
+        Map<String, dynamic> json) =>
+    OneCallWeatherDataDTO(
       lon: (json['lon'] as num).toDouble(),
       lat: (json['lat'] as num).toDouble(),
       timezone: json['timezone'] as String,
@@ -25,7 +26,8 @@ WeatherDataDTO _$WeatherDataDTOFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$WeatherDataDTOToJson(WeatherDataDTO instance) =>
+Map<String, dynamic> _$OneCallWeatherDataDTOToJson(
+        OneCallWeatherDataDTO instance) =>
     <String, dynamic>{
       'lon': instance.lon,
       'lat': instance.lat,
