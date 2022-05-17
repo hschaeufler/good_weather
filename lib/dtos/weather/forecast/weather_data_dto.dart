@@ -1,8 +1,8 @@
-import 'package:good_weather/dtos/weather/weatherforecast/current_weather_data_dto.dart';
-import 'package:good_weather/dtos/weather/weatherforecast/daily_forecast_data_dto.dart';
-import 'package:good_weather/dtos/weather/weatherforecast/hourly_forecast_data_dto.dart';
-import 'package:good_weather/dtos/weather/weatherforecast/minutely_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'current_weather_data_dto.dart';
+import 'daily_forecast_data_dto.dart';
+import 'hourly_forecast_data_dto.dart';
+import 'minutely_dto.dart';
 
 part 'weather_data_dto.g.dart';
 

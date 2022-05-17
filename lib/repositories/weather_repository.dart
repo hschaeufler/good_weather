@@ -3,7 +3,7 @@ import 'package:good_weather/mapper/dto_to_weather_data_mapper.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/repositories/i_weather_repository.dart';
 
-import '../dtos/weather/currentweather/weather_data_dto.dart';
+import '../dtos/weather/current/weather_data_dto.dart';
 import '../models/weather_data.dart';
 
 

@@ -1,4 +1,4 @@
-import 'package:good_weather/dtos/weather/currentweather/weather_data_dto.dart';
+import 'package:good_weather/dtos/weather/current/weather_data_dto.dart';
 import 'package:good_weather/mapper/i_mapper.dart';
 import 'package:good_weather/models/weather_data.dart';
 
