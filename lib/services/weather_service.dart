@@ -30,6 +30,8 @@ class WeatherService {
     return _cityRepository.getAllCities();
   }
 
+
+
   Future<List<City>> deleteAllCities() async {
     await _cityRepository.deleteAllCities();
     return _cityRepository.getAllCities();
@@ -38,5 +40,18 @@ class WeatherService {
   Future<List<City>> deleteCity(City city) async {
     await _cityRepository.deleteCity(city);
     return _cityRepository.getAllCities();
+  }
+
+  Future<int> addCityByLocation() async {
+    City city = await _cityRepository.findCityByUserLocation();
+    return _cityRepository.addCity(city);
+  }
+
+  Future<int> addCity(City city) async {
+    return _cityRepository.addCity(city);
+  }
+
+  findCityByName(String text) {
+    return _cityRepository.findCityByName(text);
   }
 }

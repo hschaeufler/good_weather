@@ -20,8 +20,24 @@ class GeocodingAPIClient {
       List<CityDTO> cityList = List<CityDTO>.from(jsonList.map((e) => CityDTO.fromJson(e)));
       return cityList;
     } else {
-      throw Exception("Webservice-Fault " + response.body);
+      return Future.error("Webservice-Fault " + response.body);
     }
+  }
 
+  static Future<List<CityDTO>> getCityFromCoordinates(double lat, double lon,{limit = 5}) async {
+    final serviceURI = Uri.https(Environment.apiEndpoint, Environment.reverseGeoCodeAPIPath, {
+      'appid':  Environment.apiToken,
+      'lon': lon.toString(),
+      'lat': lat.toString(),
+      'limit': limit.toString(),
+    });
+    final response = await http.get(serviceURI);
+    if(response.statusCode == 200) {
+      final List jsonList = jsonDecode(response.body);
+      List<CityDTO> cityList = List<CityDTO>.from(jsonList.map((e) => CityDTO.fromJson(e)));
+      return cityList;
+    } else {
+      return Future.error("Webservice-Fault " + response.body);
+    }
   }
 }
