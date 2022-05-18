@@ -16,7 +16,7 @@ class HourlyForecastDataDTO {
   final int clouds;
   final int visibility;
   final double wind_speed;
-  final double wind_gust;
+  final double? wind_gust;
   final int wind_deg;
   final Map<String, double>? rain;
   final Map<String, double>? snow;
@@ -33,7 +33,7 @@ class HourlyForecastDataDTO {
       required this.clouds,
       required this.visibility,
       required this.wind_speed,
-      required this.wind_gust,
+      this.wind_gust,
       required this.wind_deg,
       this.rain,
       this.snow,

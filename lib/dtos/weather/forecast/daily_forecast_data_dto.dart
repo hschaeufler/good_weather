@@ -24,7 +24,8 @@ class DailyForecastDataDTO {
   final List<WeatherDTO> weather;
   final int clouds;
   final double pop;
-  final double rain;
+  final double? rain;
+  final double? snow;
   final double uvi;
 
   DailyForecastDataDTO(
@@ -44,8 +45,9 @@ class DailyForecastDataDTO {
       required this.weather,
       required this.clouds,
       required this.pop,
-      required this.rain,
-      required this.uvi});
+      required this.uvi,
+        this.rain,
+        this.snow});
 
   factory DailyForecastDataDTO.fromJson(Map<String, dynamic> json) =>
       _$DailyForecastDataDTOFromJson(json);

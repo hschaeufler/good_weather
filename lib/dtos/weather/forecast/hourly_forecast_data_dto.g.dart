@@ -19,7 +19,7 @@ HourlyForecastDataDTO _$HourlyForecastDataDTOFromJson(
       clouds: json['clouds'] as int,
       visibility: json['visibility'] as int,
       wind_speed: (json['wind_speed'] as num).toDouble(),
-      wind_gust: (json['wind_gust'] as num).toDouble(),
+      wind_gust: (json['wind_gust'] as num?)?.toDouble(),
       wind_deg: json['wind_deg'] as int,
       rain: (json['rain'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num).toDouble()),

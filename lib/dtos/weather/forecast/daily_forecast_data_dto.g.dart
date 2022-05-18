@@ -28,8 +28,9 @@ DailyForecastDataDTO _$DailyForecastDataDTOFromJson(
           .toList(),
       clouds: json['clouds'] as int,
       pop: (json['pop'] as num).toDouble(),
-      rain: (json['rain'] as num).toDouble(),
       uvi: (json['uvi'] as num).toDouble(),
+      rain: (json['rain'] as num?)?.toDouble(),
+      snow: (json['snow'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$DailyForecastDataDTOToJson(
@@ -52,5 +53,6 @@ Map<String, dynamic> _$DailyForecastDataDTOToJson(
       'clouds': instance.clouds,
       'pop': instance.pop,
       'rain': instance.rain,
+      'snow': instance.snow,
       'uvi': instance.uvi,
     };
