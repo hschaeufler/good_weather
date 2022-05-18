@@ -34,7 +34,9 @@ class WeatherAPIClient {
       'lang' : lang,
     });
     final response = await http.get(serviceURI);
+    print("----------------------------------");
     print(response.body);
+    print("ullululu---------------------------");
     if(response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);
       OneCallWeatherDataDTO weather = OneCallWeatherDataDTO.fromJson(json);
