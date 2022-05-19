@@ -81,9 +81,6 @@ class _WeatherOverviewPageState extends State<WeatherOverviewPage> {
     _fetchCities();
   }
 
-  void _jumpToPage(int id) {
-
-  }
 
   @override
   void dispose() {

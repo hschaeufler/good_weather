@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/widgets/daily_forecast_list_view.dart';
+import 'package:good_weather/widgets/hourly_forecast_list_view.dart';
 
 import '../models/weather_data.dart';
 import '../services/weather_service.dart';
@@ -44,8 +45,12 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
+                    child: HourlyForecastListView(hourlyForecastList: fullWeather.hourlyForecast),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
                     child: DailyForecastListView(dailyForecastList: fullWeather.dailyForecast),
-                  )
+                  ),
                 ],
               ),
               onRefresh: () async {
