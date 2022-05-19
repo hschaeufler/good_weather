@@ -4,11 +4,16 @@ import 'package:go_router/go_router.dart';
 import 'package:good_weather/pages/location_page.dart';
 import 'package:good_weather/pages/weather_overview_page.dart';
 import 'package:good_weather/utils/environment.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl_standalone.dart';
+
 
 Future<void> main() async {
   await dotenv.load(
     fileName: Environment.envFileName,
   );
+  String locale = await findSystemLocale();
+  initializeDateFormatting(locale);
   runApp(MyApp());
 }
 

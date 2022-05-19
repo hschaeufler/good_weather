@@ -6,6 +6,8 @@ import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/models/weather_data.dart';
 
+import '../utils/date_utils.dart';
+
 class DtoToFullWeatherDataMappper implements IMapper<OneCallWeatherDataDTO, FullWeatherData> {
   final DTOtoDailyForecastDataMapper _dtoToDailyForecastDataMapper =
       DTOtoDailyForecastDataMapper();
@@ -13,7 +15,7 @@ class DtoToFullWeatherDataMappper implements IMapper<OneCallWeatherDataDTO, Full
   @override
   FullWeatherData map(OneCallWeatherDataDTO source) {
     return FullWeatherData(
-      dateTime: DateTime.fromMicrosecondsSinceEpoch(source.current.dt),
+      dateTime: fromSecondsSinceEpoch(source.current.dt),
       temp: source.current.temp,
       description: source.current.weather[0].description,
       iconName: source.current.weather[0].icon,

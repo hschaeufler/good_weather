@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:good_weather/models/weather_data.dart';
+import 'package:flutter/widgets.dart';
+import 'package:good_weather/models/daily_forecast_data.dart';
+import 'package:good_weather/utils/degree_utils.dart';
+import 'package:intl/intl.dart';
 
-import '../utils/degree_utils.dart';
 import 'weather_icon.dart';
 
-class Weather extends StatelessWidget {
-  final WeatherData weatherData;
+class DailyForecastListTile extends StatelessWidget {
+  final DailyForecastData dailyForecast;
 
-  const Weather({required this.weatherData, Key? key}) : super(key: key);
+
+  const DailyForecastListTile({required this.dailyForecast, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(weatherData.cityName,
+        Text( DateFormat(DateFormat.ABBR_WEEKDAY).format(dailyForecast.dateTime),
             style: Theme.of(context).textTheme.headlineSmall),
-        WeatherIcon(iconName: weatherData.iconName),
-        Text(weatherData.description,
+        WeatherIcon(iconName: dailyForecast.iconName),
+        Text(dailyForecast.description,
             style: Theme.of(context).textTheme.labelLarge),
-        Text(formatDegree(weatherData.temp),
+        Text(formatDegree(dailyForecast.temp),
             style: Theme.of(context).textTheme.headlineLarge),
         Row(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("T: ${formatDegree(weatherData.minTemp)}",
+              child: Text("T: ${formatDegree(dailyForecast.minTemp)}",
                   style: Theme.of(context).textTheme.labelLarge),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("H: ${formatDegree(weatherData.maxTemp)}",
+              child: Text("H: ${formatDegree(dailyForecast.maxTemp)}",
                   style: Theme.of(context).textTheme.labelLarge),
             ),
           ],
@@ -38,4 +41,6 @@ class Weather extends StatelessWidget {
       ],
     );
   }
+
+
 }

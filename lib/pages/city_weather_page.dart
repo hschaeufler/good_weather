@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:good_weather/models/city.dart';
+import 'package:good_weather/models/full_weather_data.dart';
+import 'package:good_weather/widgets/daily_forecast_list_view.dart';
 
 import '../models/weather_data.dart';
 import '../services/weather_service.dart';
@@ -19,7 +21,7 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
 
   final WeatherService _weatherService = WeatherService();
 
-  Future<WeatherData>? weatherData;
+  Future<List<Object>>? weatherData;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,19 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
           return Text(snapshot.error!.toString());
         } else if (snapshot.hasData &&
             snapshot.connectionState == ConnectionState.done) {
-          WeatherData weather = snapshot.data;
+          WeatherData weather = snapshot.data[0];
+          FullWeatherData fullWeather = snapshot.data[1];
+          print(fullWeather.dailyForecast.length);
           return RefreshIndicator(
               child: ListView(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Weather(weatherData: weather),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: DailyForecastListView(dailyForecastList: fullWeather.dailyForecast),
                   )
                 ],
               ),
@@ -51,7 +59,7 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
 
   _fetchWeatherData() {
       setState(() {
-        weatherData = _weatherService.getWeather(widget.city);
+        weatherData = Future.wait([_weatherService.getWeather(widget.city), _weatherService.getFullWeather(widget.city)]);
       });
   }
 
