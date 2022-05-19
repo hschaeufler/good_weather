@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/models/city.dart';
-import 'package:good_weather/pages/city_weather_page.dart';
+import 'package:good_weather/screens/weather_page_view_screen.dart';
+import 'package:good_weather/screens/weather_page_screen.dart';
 import 'package:good_weather/services/weather_service.dart';
 
 import '../widgets/city_drawer.dart';
 
-class WeatherOverviewPage extends StatefulWidget {
-  const WeatherOverviewPage({this.cityId, Key? key}) : super(key: key);
+class WeatherPage extends StatefulWidget {
+  const WeatherPage({this.cityId, Key? key}) : super(key: key);
 
   final int? cityId;
 
   @override
-  State<WeatherOverviewPage> createState() => _WeatherOverviewPageState();
+  State<WeatherPage> createState() => _WeatherPageState();
 }
 
-class _WeatherOverviewPageState extends State<WeatherOverviewPage> {
+class _WeatherPageState extends State<WeatherPage> {
   final WeatherService _weatherService = WeatherService();
-  final PageController _controller = PageController();
 
   Future<List<City>>? cities;
 
@@ -40,13 +40,7 @@ class _WeatherOverviewPageState extends State<WeatherOverviewPage> {
             } else if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
               final List<City> cityList = snapshot.data;
-              return PageView.builder(
-                  itemCount: cityList.length,
-                  controller: _controller,
-                  itemBuilder: (BuildContext context, int index) {
-                    final City city = cityList[index];
-                    return CityWeatherPage(city: city);
-                  });
+              return WeatherPageViewScreen(cityList: cityList, cityId: widget.cityId,);
             }
             return const Center(child: CircularProgressIndicator());
           },
@@ -81,20 +75,12 @@ class _WeatherOverviewPageState extends State<WeatherOverviewPage> {
     _fetchCities();
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+
+
 
   @override
-  void didUpdateWidget(WeatherOverviewPage oldWidget) {
+  void didUpdateWidget(WeatherPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.cityId != null) {
-      cities?.then((List<City> cityList) {
-        int id = cityList.indexWhere((city) => city.id == widget.cityId);
-        _controller.jumpToPage(id);
-      });
-    }
+    _fetchCities();
   }
 }

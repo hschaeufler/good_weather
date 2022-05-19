@@ -1,3 +1,5 @@
+import 'package:good_weather/models/full_weather_data.dart';
+
 import '../models/city.dart';
 import '../models/weather_data.dart';
 import '../repositories/city_repository.dart';
@@ -18,6 +20,10 @@ class WeatherService {
 
   Future<WeatherData> getWeather(City city) {
     return _weatherRepository.getCurrentWeather(city);
+  }
+
+  Future<FullWeatherData> getFullWeather(City city) {
+    return _weatherRepository.getFullWeatherData(city);
   }
 
   Future<WeatherData> getWeatherByCityId(int cityId) {
