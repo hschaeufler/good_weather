@@ -35,20 +35,19 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
             snapshot.connectionState == ConnectionState.done) {
           WeatherData weather = snapshot.data[0];
           FullWeatherData fullWeather = snapshot.data[1];
-          print(fullWeather.dailyForecast.length);
           return RefreshIndicator(
               child: ListView(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.all(20),
                     child: Weather(weatherData: weather),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, left: 10, right: 10),
                     child: HourlyForecastListView(hourlyForecastList: fullWeather.hourlyForecast),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 25, bottom: 25, left: 10, right: 10),
                     child: DailyForecastListView(dailyForecastList: fullWeather.dailyForecast),
                   ),
                 ],

@@ -23,7 +23,7 @@ class HourlyForecastListView extends StatelessWidget {
         itemCount: hourlyForecastList.length,
         shrinkWrap: true,
       ),
-      size: const Size.square(227),
+      size: const Size.square(101),
     );
   }
 }

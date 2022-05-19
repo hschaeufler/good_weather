@@ -18,10 +18,10 @@ class HourlyForecastListTile extends StatelessWidget {
     return Column(
       children: [
         Text( DateFormat(DateFormat.HOUR24).format(hourlyForecastData.dateTime),
-            style: Theme.of(context).textTheme.headlineSmall),
-        WeatherIcon(iconName: hourlyForecastData.iconName),
+            style: Theme.of(context).textTheme.labelLarge),
+        WeatherIcon(iconName: hourlyForecastData.iconName, scale: 1.5,),
         Text(formatDegree(hourlyForecastData.temp),
-            style: Theme.of(context).textTheme.headlineLarge),
+            style: Theme.of(context).textTheme.labelLarge),
       ],
     );
   }

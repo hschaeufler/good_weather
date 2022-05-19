@@ -7,7 +7,6 @@ class DTOtoDailyForecastDataMapper
     extends IMapper<DailyForecastDataDTO, DailyForecastData> {
   @override
   DailyForecastData map(DailyForecastDataDTO source) {
-    print(source.dt);
     return DailyForecastData(
       dateTime: fromSecondsSinceEpoch(source.dt),
       iconName: source.weather[0].icon,
