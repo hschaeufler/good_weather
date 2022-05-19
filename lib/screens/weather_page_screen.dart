@@ -8,17 +8,17 @@ import '../models/weather_data.dart';
 import '../services/weather_service.dart';
 import '../widgets/weather.dart';
 
-class CityWeatherPage extends StatefulWidget {
+class WeatherPageScreen extends StatefulWidget {
 
   final City city;
 
-  const CityWeatherPage({required this.city, Key? key}) : super(key: key);
+  const WeatherPageScreen({required this.city, Key? key}) : super(key: key);
 
   @override
-  State<CityWeatherPage> createState() => _CityWeatherPageState();
+  State<WeatherPageScreen> createState() => _WeatherPageScreenState();
 }
 
-class _CityWeatherPageState extends State<CityWeatherPage> {
+class _WeatherPageScreenState extends State<WeatherPageScreen> {
 
   final WeatherService _weatherService = WeatherService();
 
