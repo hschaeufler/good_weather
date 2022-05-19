@@ -15,14 +15,17 @@ OneCallWeatherDataDTO _$OneCallWeatherDataDTOFromJson(
       timezone_offset: json['timezone_offset'] as int,
       current: CurrentWeatherDataDTO.fromJson(
           json['current'] as Map<String, dynamic>),
-      minutely: (json['minutely'] as List<dynamic>)
-          .map((e) => MinutelyDTO.fromJson(e as Map<String, dynamic>))
+      minutely: (json['minutely'] as List<dynamic>?)
+          ?.map((e) => MinutelyDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
       hourly: (json['hourly'] as List<dynamic>)
           .map((e) => HourlyForecastDataDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
       daily: (json['daily'] as List<dynamic>)
           .map((e) => DailyForecastDataDTO.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      alerts: (json['alerts'] as List<dynamic>?)
+          ?.map((e) => AlertDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -37,4 +40,5 @@ Map<String, dynamic> _$OneCallWeatherDataDTOToJson(
       'minutely': instance.minutely,
       'hourly': instance.hourly,
       'daily': instance.daily,
+      'alerts': instance.alerts,
     };
