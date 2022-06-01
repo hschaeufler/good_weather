@@ -10,6 +10,8 @@ class Environment {
   static String get reverseGeoCodeAPIPath => dotenv.env['REVERSE_GEO_API_PATH'] ?? '';
   static String get weatherAPIPath => dotenv.env['WEATHER_API_PATH'] ?? '';
   static String get forecastAPIPath => dotenv.env['FORECAST_API_PATH'] ?? '';
+  static String get teleportLocationsAPIPath => dotenv.env['TELEPORT_LOCATIONS_API_PATH'] ?? '';
+  static String get teleportImagesSuffix => dotenv.env['TELEPORT_LOCATIONS_API_PATH'] ?? '';
   static String get iconBaseURL => dotenv.env['ICON_SERVICE_URL'] ?? '';
   static String get geoCodeBaseURL => openWeatherApiEndpoint + geoCodeAPIPath;
   static String get reverseGeoCodeBaseURL => openWeatherApiEndpoint + reverseGeoCodeAPIPath;
