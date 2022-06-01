@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class GeocodingAPIClient {
 
   static Future<List<CityDTO>> getCityCoordinates(String cityName,{limit = 5, lang = "de"}) async {
-    final serviceURI = Uri.https(Environment.apiEndpoint, Environment.geoCodeAPIPath, {
+    final serviceURI = Uri.https(Environment.openWeatherApiEndpoint, Environment.geoCodeAPIPath, {
       'appid':  Environment.apiToken,
       'q': cityName,
       'limit': limit.toString(),
@@ -25,7 +25,7 @@ class GeocodingAPIClient {
   }
 
   static Future<List<CityDTO>> getCityFromCoordinates(double lat, double lon,{limit = 5}) async {
-    final serviceURI = Uri.https(Environment.apiEndpoint, Environment.reverseGeoCodeAPIPath, {
+    final serviceURI = Uri.https(Environment.openWeatherApiEndpoint, Environment.reverseGeoCodeAPIPath, {
       'appid':  Environment.apiToken,
       'lon': lon.toString(),
       'lat': lat.toString(),
