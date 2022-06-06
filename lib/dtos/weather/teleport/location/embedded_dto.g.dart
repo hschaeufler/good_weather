@@ -7,11 +7,11 @@ part of 'embedded_dto.dart';
 // **************************************************************************
 
 EmbeddedDTO _$EmbeddedDTOFromJson(Map<String, dynamic> json) => EmbeddedDTO(
-      locationNearestCities: (json['locationNearestCities'] as List<dynamic>)
+      locationNearestCities: (json['location:nearest-cities'] as List<dynamic>)
           .map(
               (e) => LocationNearestCityDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
-      locationNearestUrbanAreas: (json['locationNearestUrbanAreas']
+      locationNearestUrbanAreas: (json['location:nearest-urban-areas']
               as List<dynamic>)
           .map((e) =>
               LocationNearestUrbanAreaDTO.fromJson(e as Map<String, dynamic>))
@@ -20,6 +20,6 @@ EmbeddedDTO _$EmbeddedDTOFromJson(Map<String, dynamic> json) => EmbeddedDTO(
 
 Map<String, dynamic> _$EmbeddedDTOToJson(EmbeddedDTO instance) =>
     <String, dynamic>{
-      'locationNearestCities': instance.locationNearestCities,
-      'locationNearestUrbanAreas': instance.locationNearestUrbanAreas,
+      'location:nearest-cities': instance.locationNearestCities,
+      'location:nearest-urban-areas': instance.locationNearestUrbanAreas,
     };

@@ -10,11 +10,11 @@ LocationNearestCityLinksDTO _$LocationNearestCityLinksDTOFromJson(
         Map<String, dynamic> json) =>
     LocationNearestCityLinksDTO(
       locationNearestCity: LocationNearestDTO.fromJson(
-          json['locationNearestCity'] as Map<String, dynamic>),
+          json['location:nearest-city'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LocationNearestCityLinksDTOToJson(
         LocationNearestCityLinksDTO instance) =>
     <String, dynamic>{
-      'locationNearestCity': instance.locationNearestCity,
+      'location:nearest-city': instance.locationNearestCity,
     };

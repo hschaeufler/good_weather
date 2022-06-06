@@ -12,7 +12,9 @@ class EmbeddedDTO {
     required this.locationNearestUrbanAreas,
   });
 
+  @JsonKey(name: 'location:nearest-cities')
   List<LocationNearestCityDTO> locationNearestCities;
+  @JsonKey(name: 'location:nearest-urban-areas')
   List<LocationNearestUrbanAreaDTO> locationNearestUrbanAreas;
 
   factory EmbeddedDTO.fromJson(Map<String, dynamic> json) => _$EmbeddedDTOFromJson(json);

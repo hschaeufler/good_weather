@@ -11,8 +11,10 @@ class LocationNearestUrbanAreaDTO {
     required this.distanceKm,
   });
 
+  @JsonKey(name: '_links')
   final LocationNearestUrbanAreaLinksDTO links;
-  final int distanceKm;
+  @JsonKey(name: 'distance_km')
+  final double distanceKm;
 
   factory LocationNearestUrbanAreaDTO.fromJson(Map<String, dynamic> json) => _$LocationNearestUrbanAreaDTOFromJson(json);
   Map<String, dynamic> toJson() => _$LocationNearestUrbanAreaDTOToJson(this);

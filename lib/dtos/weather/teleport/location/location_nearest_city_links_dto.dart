@@ -11,6 +11,7 @@ class LocationNearestCityLinksDTO {
     required this.locationNearestCity,
   });
 
+  @JsonKey(name: 'location:nearest-city')
   final LocationNearestDTO locationNearestCity;
 
   factory LocationNearestCityLinksDTO.fromJson(Map<String, dynamic> json) => _$LocationNearestCityLinksDTOFromJson(json);

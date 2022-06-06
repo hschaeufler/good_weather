@@ -9,7 +9,7 @@ part of 'teleport_location_data_dto.dart';
 TeleportLocationDataDTO _$TeleportLocationDataDTOFromJson(
         Map<String, dynamic> json) =>
     TeleportLocationDataDTO(
-      embedded: EmbeddedDTO.fromJson(json['embedded'] as Map<String, dynamic>),
+      embedded: EmbeddedDTO.fromJson(json['_embedded'] as Map<String, dynamic>),
       coordinates:
           CoordinatesDTO.fromJson(json['coordinates'] as Map<String, dynamic>),
     );
@@ -17,6 +17,6 @@ TeleportLocationDataDTO _$TeleportLocationDataDTOFromJson(
 Map<String, dynamic> _$TeleportLocationDataDTOToJson(
         TeleportLocationDataDTO instance) =>
     <String, dynamic>{
-      'embedded': instance.embedded,
+      '_embedded': instance.embedded,
       'coordinates': instance.coordinates,
     };

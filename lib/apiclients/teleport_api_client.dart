@@ -8,11 +8,13 @@ import 'package:http/http.dart';
 
 class TeleportApiClient {
   static Future<TeleportLocationDataDTO> getLocation(double longitude, double latitude) async {
-    final serviceURI = Uri.https(Environment.teleportApiEndpoint, '${Environment.teleportLocationsAPIPath}$longitude,$latitude', {
+    final serviceURI = Uri.https(Environment.teleportApiEndpoint, '${Environment.teleportLocationsAPIPath}$latitude,$longitude', {
       'embed' : 'location:nearest-urban-areas',
     });
+    print(serviceURI.toString());
     final response = await get(serviceURI);
     if(response.statusCode == 200) {
+      print(response.body);
       final Map<String, dynamic> json = jsonDecode(response.body);
       TeleportLocationDataDTO location = TeleportLocationDataDTO.fromJson(json);
       return location;
@@ -23,6 +25,7 @@ class TeleportApiClient {
 
   static Future<TeleportUrbanAreaImageDataDTO> getUrbanAreaImage(String urbanAreaUrl) async {
     final serviceURI = Uri.parse('$urbanAreaUrl${Environment.teleportImagesSuffix}');
+    print(serviceURI.toString());
     final response = await get(serviceURI);
     if(response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);

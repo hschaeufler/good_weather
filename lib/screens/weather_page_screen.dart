@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:good_weather/models/city.dart';
+import 'package:good_weather/models/city_image_data.dart';
 import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/widgets/daily_forecast_list_view.dart';
 import 'package:good_weather/widgets/hourly_forecast_list_view.dart';
@@ -9,7 +10,6 @@ import '../services/weather_service.dart';
 import '../widgets/weather.dart';
 
 class WeatherPageScreen extends StatefulWidget {
-
   final City city;
 
   const WeatherPageScreen({required this.city, Key? key}) : super(key: key);
@@ -19,7 +19,6 @@ class WeatherPageScreen extends StatefulWidget {
 }
 
 class _WeatherPageScreenState extends State<WeatherPageScreen> {
-
   final WeatherService _weatherService = WeatherService();
 
   Future<List<Object>>? weatherData;
@@ -35,22 +34,35 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             snapshot.connectionState == ConnectionState.done) {
           WeatherData weather = snapshot.data[0];
           FullWeatherData fullWeather = snapshot.data[1];
+          CityImageData image = snapshot.data[2];
           return RefreshIndicator(
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Weather(weatherData: weather),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25, bottom: 25, left: 10, right: 10),
-                    child: HourlyForecastListView(hourlyForecastList: fullWeather.hourlyForecast),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25, bottom: 25, left: 10, right: 10),
-                    child: DailyForecastListView(dailyForecastList: fullWeather.dailyForecast),
-                  ),
-                ],
+              child: Container(
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Weather(weatherData: weather),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 25, bottom: 25, left: 10, right: 10),
+                      child: HourlyForecastListView(
+                          hourlyForecastList: fullWeather.hourlyForecast),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 25, bottom: 25, left: 10, right: 10),
+                      child: DailyForecastListView(
+                          dailyForecastList: fullWeather.dailyForecast),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          image.mobile),
+                      fit: BoxFit.cover),
+                ),
               ),
               onRefresh: () async {
                 _fetchWeatherData();
@@ -62,9 +74,13 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
   }
 
   _fetchWeatherData() {
-      setState(() {
-        weatherData = Future.wait([_weatherService.getWeather(widget.city), _weatherService.getFullWeather(widget.city)]);
-      });
+    setState(() {
+      weatherData = Future.wait([
+        _weatherService.getWeather(widget.city),
+        _weatherService.getFullWeather(widget.city),
+        _weatherService.getCityImage(widget.city),
+      ]);
+    });
   }
 
   @override
@@ -72,5 +88,4 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
     super.initState();
     _fetchWeatherData();
   }
-
 }

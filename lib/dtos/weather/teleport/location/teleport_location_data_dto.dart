@@ -13,6 +13,7 @@ class TeleportLocationDataDTO {
     required this.coordinates,
   });
 
+  @JsonKey(name: '_embedded')
   EmbeddedDTO embedded;
   CoordinatesDTO coordinates;
 
