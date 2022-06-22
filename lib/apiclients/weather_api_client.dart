@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 class WeatherAPIClient {
 
   static Future<WeatherDataDTO> getCurrentWeather(double longitude, double latitude,{units = "metric", lang = "de"}) async {
-    final serviceURI = Uri.https(Environment.apiEndpoint, Environment.weatherAPIPath, {
-      'appid':  Environment.apiToken,
+    final serviceURI = Uri.https(Environment.openWeatherApiEndpoint, Environment.weatherAPIPath, {
+      'appid':  Environment.openWeatherApiToken,
       'lon': longitude.toString(),
       'lat' : latitude.toString(),
       'units': units,
@@ -25,8 +25,8 @@ class WeatherAPIClient {
   }
 
   static Future<OneCallWeatherDataDTO> getOneCallWeatherData(double longitude, double latitude,{units = "metric", lang = "de"}) async {
-    final serviceURI = Uri.https(Environment.apiEndpoint, Environment.forecastAPIPath, {
-      'appid':  Environment.apiToken,
+    final serviceURI = Uri.https(Environment.openWeatherApiEndpoint, Environment.forecastAPIPath, {
+      'appid':  Environment.openWeatherApiToken,
       'lon': longitude.toString(),
       'lat' : latitude.toString(),
       'units': units,
