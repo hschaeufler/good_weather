@@ -36,37 +36,42 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
           FullWeatherData fullWeather = snapshot.data[1];
           CityImageData image = snapshot.data[2];
           return RefreshIndicator(
-              child: Container(
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Weather(weatherData: weather),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 25, bottom: 25, left: 10, right: 10),
-                      child: HourlyForecastListView(
-                          hourlyForecastList: fullWeather.hourlyForecast),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 25, bottom: 25, left: 10, right: 10),
-                      child: DailyForecastListView(
-                          dailyForecastList: fullWeather.dailyForecast),
-                    ),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          image.mobile),
-                      fit: BoxFit.cover),
-                ),
+            onRefresh: () async {
+              _fetchWeatherData();
+            },
+            child: Container(
+              child: DraggableScrollableSheet(
+                  minChildSize: 0.5,
+                  builder: (BuildContext context,
+                      ScrollController scrollController) {
+                    return ListView(
+                      controller: scrollController,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Weather(weatherData: weather),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 25, bottom: 25, left: 10, right: 10),
+                          child: HourlyForecastListView(
+                              hourlyForecastList: fullWeather.hourlyForecast),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 25, bottom: 25, left: 10, right: 10),
+                          child: DailyForecastListView(
+                              dailyForecastList: fullWeather.dailyForecast),
+                        ),
+                      ],
+                    );
+                  }),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(image.mobile), fit: BoxFit.cover),
               ),
-              onRefresh: () async {
-                _fetchWeatherData();
-              });
+            ),
+          );
         }
         return const Center(child: CircularProgressIndicator());
       },
