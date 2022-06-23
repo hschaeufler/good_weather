@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_weather/screens/parallax_flow_delegate.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/models/city_image_data.dart';
 import 'package:good_weather/models/full_weather_data.dart';
@@ -23,6 +24,12 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
 
   Future<List<Object>>? weatherData;
 
+  final GlobalKey _backgroundImageKey = GlobalKey();
+  final DraggableScrollableController _scrollController =
+      DraggableScrollableController();
+
+  double scrollFraction = 0;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -39,37 +46,58 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             onRefresh: () async {
               _fetchWeatherData();
             },
-            child: Container(
-              child: DraggableScrollableSheet(
-                  minChildSize: 0.5,
-                  builder: (BuildContext context,
-                      ScrollController scrollController) {
-                    return ListView(
-                      controller: scrollController,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Weather(weatherData: weather),
+            child: Stack(
+              children: [
+                Flow(
+                  delegate: ParallaxFlowDelegate(
+                    backgroundImageKey: _backgroundImageKey,
+                    buildContext: context,
+                    controller: _scrollController,
+                  ),
+                  children: [
+                    Transform.scale(
+                      scale: 1.1,
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        key: _backgroundImageKey,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(image.mobile),
+                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 25, bottom: 25, left: 10, right: 10),
-                          child: HourlyForecastListView(
-                              hourlyForecastList: fullWeather.hourlyForecast),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 25, bottom: 25, left: 10, right: 10),
-                          child: DailyForecastListView(
-                              dailyForecastList: fullWeather.dailyForecast),
-                        ),
-                      ],
-                    );
-                  }),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(image.mobile), fit: BoxFit.cover),
-              ),
+                      ),
+                    ),
+                  ],
+                ),
+                DraggableScrollableSheet(
+                    controller: _scrollController,
+                    minChildSize: 0.5,
+                    builder: (BuildContext context,
+                        ScrollController scrollController) {
+                      return ListView(
+                        controller: scrollController,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Weather(weatherData: weather),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 25, bottom: 25, left: 10, right: 10),
+                            child: HourlyForecastListView(
+                                hourlyForecastList: fullWeather.hourlyForecast),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 25, bottom: 25, left: 10, right: 10),
+                            child: DailyForecastListView(
+                                dailyForecastList: fullWeather.dailyForecast),
+                          ),
+                        ],
+                      );
+                    }),
+              ],
             ),
           );
         }
