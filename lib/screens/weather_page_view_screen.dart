@@ -57,7 +57,7 @@ class _WeatherPageViewScreenState extends State<WeatherPageViewScreen> {
   void initState() {
     super.initState();
     if (widget.cityId != null) {
-      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         _jumpToCity(widget.cityId!);
       });
     }

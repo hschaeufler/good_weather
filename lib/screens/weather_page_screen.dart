@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_weather/screens/parallax_flow_delegate.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/models/city_image_data.dart';
 import 'package:good_weather/models/full_weather_data.dart';
@@ -23,6 +24,10 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
 
   Future<List<Object>>? weatherData;
 
+  final GlobalKey _backgroundImageKey = GlobalKey();
+  final DraggableScrollableController _scrollController =
+      DraggableScrollableController();
+
   double scrollFraction = 0;
 
   @override
@@ -41,64 +46,58 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             onRefresh: () async {
               _fetchWeatherData();
             },
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                print("Pixels: ${scrollNotification.metrics.pixels}");
-                print("Max: ${scrollNotification.metrics.maxScrollExtent}");
-                print(
-                    "Viewport: ${scrollNotification.metrics.viewportDimension}");
-                setState(() {
-                  scrollFraction = ((scrollNotification.metrics.maxScrollExtent -
-                          scrollNotification.metrics.pixels) /
-                      scrollNotification.metrics.viewportDimension).clamp(0.0, 1.0);
-                });
-                print("diff: ${scrollFraction}");
-                return false;
-              },
-              child: Stack(
-                children: [
-                  Transform.scale(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(image.mobile),
+            child: Stack(
+              children: [
+                Flow(
+                  delegate: ParallaxFlowDelegate(
+                    backgroundImageKey: _backgroundImageKey,
+                    buildContext: context,
+                    controller: _scrollController,
+                  ),
+                  children: [
+                    Transform.scale(
+                      scale: 1.1,
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        key: _backgroundImageKey,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(image.mobile),
+                          ),
                         ),
                       ),
                     ),
-                    scale: 1.2,
-                    alignment: Alignment(0, scrollFraction * 2 - 1),
-                    //alignment: Alignment.topCenter,
-                  ),
-                  DraggableScrollableSheet(
-                      minChildSize: 0.5,
-                      builder: (BuildContext context,
-                          ScrollController scrollController) {
-                        return ListView(
-                          controller: scrollController,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Weather(weatherData: weather),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 25, bottom: 25, left: 10, right: 10),
-                              child: HourlyForecastListView(
-                                  hourlyForecastList:
-                                      fullWeather.hourlyForecast),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 25, bottom: 25, left: 10, right: 10),
-                              child: DailyForecastListView(
-                                  dailyForecastList: fullWeather.dailyForecast),
-                            ),
-                          ],
-                        );
-                      }),
-                ],
-              ),
+                  ],
+                ),
+                DraggableScrollableSheet(
+                    controller: _scrollController,
+                    minChildSize: 0.5,
+                    builder: (BuildContext context,
+                        ScrollController scrollController) {
+                      return ListView(
+                        controller: scrollController,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Weather(weatherData: weather),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 25, bottom: 25, left: 10, right: 10),
+                            child: HourlyForecastListView(
+                                hourlyForecastList: fullWeather.hourlyForecast),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 25, bottom: 25, left: 10, right: 10),
+                            child: DailyForecastListView(
+                                dailyForecastList: fullWeather.dailyForecast),
+                          ),
+                        ],
+                      );
+                    }),
+              ],
             ),
           );
         }
