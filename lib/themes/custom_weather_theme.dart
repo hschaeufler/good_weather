@@ -4,6 +4,7 @@ class CustomWeatherTheme {
   static ThemeData get light {
     return ThemeData(
         brightness: Brightness.light,
+        colorSchemeSeed: Colors.blueGrey,
         textTheme: const TextTheme(
           headlineLarge: TextStyle(color: Colors.white),
           headlineMedium: TextStyle(color: Colors.white),
