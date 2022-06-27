@@ -15,7 +15,7 @@ class ParallaxFlowDelegate extends FlowDelegate {
   @override
   void paintChildren(FlowPaintingContext context) {
     double scrollFraction = controller.size * 2 - 1;
-    double opacity = 1 - scrollFraction / 2;
+    double opacity = 1 - scrollFraction / 3;
     double height = context.size.height;
     double pixels = scrollFraction * (height / 10);
 

@@ -22,13 +22,11 @@ class WeatherPageScreen extends StatefulWidget {
 class _WeatherPageScreenState extends State<WeatherPageScreen> {
   final WeatherService _weatherService = WeatherService();
 
-  Future<List<Object>>? weatherData;
+  Future<List<Object?>>? weatherData;
 
   final GlobalKey _backgroundImageKey = GlobalKey();
   final DraggableScrollableController _scrollController =
       DraggableScrollableController();
-
-  double scrollFraction = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             snapshot.connectionState == ConnectionState.done) {
           WeatherData weather = snapshot.data[0];
           FullWeatherData fullWeather = snapshot.data[1];
-          CityImageData image = snapshot.data[2];
+          String? image = snapshot.data[2];
           return RefreshIndicator(
             onRefresh: () async {
               _fetchWeatherData();
@@ -60,12 +58,22 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         key: _backgroundImageKey,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(image.mobile),
-                          ),
-                        ),
+                        decoration: image != null
+                            ? BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(image),
+                                ),
+                              )
+                            : BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.blue.shade50,
+                                      Colors.blue.shade900
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
+                              ),
                       ),
                     ),
                   ],
@@ -75,26 +83,38 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
                     minChildSize: 0.5,
                     builder: (BuildContext context,
                         ScrollController scrollController) {
-                      return ListView(
-                        controller: scrollController,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Weather(weatherData: weather),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 25, bottom: 25, left: 10, right: 10),
-                            child: HourlyForecastListView(
-                                hourlyForecastList: fullWeather.hourlyForecast),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 25, bottom: 25, left: 10, right: 10),
-                            child: DailyForecastListView(
-                                dailyForecastList: fullWeather.dailyForecast),
-                          ),
-                        ],
+                      return Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                          colors: [
+                            Colors.black.withOpacity(0.05),
+                            Colors.black.withOpacity(0.3)
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        )),
+                        child: ListView(
+                          controller: scrollController,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Weather(weatherData: weather),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 25, bottom: 25, left: 10, right: 10),
+                              child: HourlyForecastListView(
+                                  hourlyForecastList:
+                                      fullWeather.hourlyForecast),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 25, bottom: 25, left: 10, right: 10),
+                              child: DailyForecastListView(
+                                  dailyForecastList: fullWeather.dailyForecast),
+                            ),
+                          ],
+                        ),
                       );
                     }),
               ],

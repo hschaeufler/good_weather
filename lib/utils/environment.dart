@@ -13,9 +13,10 @@ class Environment {
   static String get teleportLocationsAPIPath => dotenv.env['TELEPORT_LOCATIONS_API_PATH'] ?? '';
   static String get teleportImagesSuffix => dotenv.env['TELEPORT_IMAGES_SUFFIX'] ?? '';
   static String get iconBaseURL => dotenv.env['ICON_SERVICE_URL'] ?? '';
-  static String get geoCodeBaseURL => openWeatherApiEndpoint + geoCodeAPIPath;
-  static String get reverseGeoCodeBaseURL => openWeatherApiEndpoint + reverseGeoCodeAPIPath;
-  static String get weatherBaseURL => openWeatherApiEndpoint + geoCodeAPIPath;
-  static String get forecastBaseURL => openWeatherApiEndpoint + forecastAPIPath;
+  static String get mapsApiToken => dotenv.env['MAPS_API_TOKEN'] ?? '';
+  static String get mapsApiEndpoint => dotenv.env['MAPS_API_ENDPOINT'] ?? '';
+  static String get mapsGecodeApiPath => dotenv.env['MAPS_GEOCODE_API_PATH'] ?? '';
+  static String get mapsPlaceDetailsApiPath => dotenv.env['MAPS_PLACE_DETAIL_API_PATH'] ?? '';
+  static String get mapsPhotoApiPath => dotenv.env['MAPS_PHOTO_API_PATH'] ?? '';
   static String iconURL(String iconName) => iconBaseURL.replaceFirst("[iconName]", iconName);
 }
