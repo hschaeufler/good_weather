@@ -3,6 +3,8 @@ import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/repositories/image_repository.dart';
 import 'package:good_weather/repositories/teleport_repository.dart';
 
+import 'package:collection/collection.dart';
+
 import '../models/city.dart';
 import '../models/weather_data.dart';
 import '../repositories/city_repository.dart';
@@ -41,9 +43,10 @@ class WeatherService {
     return _cityRepository.getAllCities();
   }
 
-  Future<String> getCityImage(City city) async {
+  Future<String?> getCityImage(City city) async {
     try {
-      final String image = (await _imageRepository.getImage(city.lon, city.lat))[0];
+      final String? image = (await _imageRepository.getImage(city.lon, city.lat)).firstOrNull;
+      print(image);
       return image;
     } catch (e, stacktrace) {
       print("Exception $e");

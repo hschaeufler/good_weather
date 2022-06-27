@@ -22,7 +22,7 @@ class WeatherPageScreen extends StatefulWidget {
 class _WeatherPageScreenState extends State<WeatherPageScreen> {
   final WeatherService _weatherService = WeatherService();
 
-  Future<List<Object>>? weatherData;
+  Future<List<Object?>>? weatherData;
 
   final GlobalKey _backgroundImageKey = GlobalKey();
   final DraggableScrollableController _scrollController =
@@ -39,7 +39,7 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             snapshot.connectionState == ConnectionState.done) {
           WeatherData weather = snapshot.data[0];
           FullWeatherData fullWeather = snapshot.data[1];
-          String image = snapshot.data[2];
+          String? image = snapshot.data[2];
           return RefreshIndicator(
             onRefresh: () async {
               _fetchWeatherData();
@@ -58,12 +58,22 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         key: _backgroundImageKey,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(image),
-                          ),
-                        ),
+                        decoration: image != null
+                            ? BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(image),
+                                ),
+                              )
+                            : BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.blue.shade50,
+                                      Colors.blue.shade900
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter),
+                              ),
                       ),
                     ),
                   ],
@@ -76,7 +86,10 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
                       return Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
-                          colors: [Colors.black.withOpacity(0.05), Colors.black.withOpacity(0.3)],
+                          colors: [
+                            Colors.black.withOpacity(0.05),
+                            Colors.black.withOpacity(0.3)
+                          ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         )),
