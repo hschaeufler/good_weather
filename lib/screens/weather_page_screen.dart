@@ -39,7 +39,7 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
             snapshot.connectionState == ConnectionState.done) {
           WeatherData weather = snapshot.data[0];
           FullWeatherData fullWeather = snapshot.data[1];
-          CityImageData image = snapshot.data[2];
+          String image = snapshot.data[2];
           return RefreshIndicator(
             onRefresh: () async {
               _fetchWeatherData();
@@ -61,7 +61,7 @@ class _WeatherPageScreenState extends State<WeatherPageScreen> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(image.mobile),
+                            image: NetworkImage(image),
                           ),
                         ),
                       ),

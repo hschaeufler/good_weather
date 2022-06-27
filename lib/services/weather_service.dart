@@ -1,5 +1,6 @@
-import 'package:good_weather/models/city_image_data.dart';
+
 import 'package:good_weather/models/full_weather_data.dart';
+import 'package:good_weather/repositories/image_repository.dart';
 import 'package:good_weather/repositories/teleport_repository.dart';
 
 import '../models/city.dart';
@@ -20,6 +21,7 @@ class WeatherService {
   final CityRepository _cityRepository = CityRepository();
   final WeatherRepository _weatherRepository = WeatherRepository();
   final TeleportRepository _teleportRepository = TeleportRepository();
+  final ImageRepository _imageRepository = ImageRepository();
 
   Future<WeatherData> getWeather(City city) {
     return _weatherRepository.getCurrentWeather(city);
@@ -39,8 +41,15 @@ class WeatherService {
     return _cityRepository.getAllCities();
   }
 
-  Future<CityImageData> getCityImage(City city) async {
-    return (await _teleportRepository.getImage(city.lon, city.lat))[0];
+  Future<String> getCityImage(City city) async {
+    try {
+      final String image = (await _imageRepository.getImage(city.lon, city.lat))[0];
+      return image;
+    } catch (e, stacktrace) {
+      print("Exception $e");
+      print("StackTrace $stacktrace");
+      rethrow;
+    }
   }
 
   Future<List<City>> deleteAllCities() async {
