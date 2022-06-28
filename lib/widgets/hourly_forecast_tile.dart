@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/hourly_forecast_data.dart';
 import 'package:good_weather/utils/degree_utils.dart';
 import 'package:intl/intl.dart';

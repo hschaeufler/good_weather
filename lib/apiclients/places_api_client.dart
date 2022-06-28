@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 
 import '../dtos/places/place_details/place_details_data_dto.dart';
 import '../dtos/places/place_id/maps_geocode_data_dto.dart';
 import '../utils/environment.dart';
-import 'package:http/http.dart';
 
 class PlacesApiClient {
   static Future<MapsGeocodeDataDto> getPlaceId(double longitude, double latitude) async {

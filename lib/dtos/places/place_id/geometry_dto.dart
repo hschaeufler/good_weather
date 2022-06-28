@@ -1,6 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'bounds_dto.dart';
 import 'location_dto.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'geometry_dto.g.dart';
 

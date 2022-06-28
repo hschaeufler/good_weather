@@ -1,10 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'cloud_dto.dart';
+import 'coordinates_dto.dart';
 import 'system_dto.dart';
 import 'temperature_dto.dart';
 import 'weather_dto.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-import 'coordinates_dto.dart';
 import 'wind_dto.dart';
 
 part 'weather_data_dto.g.dart';

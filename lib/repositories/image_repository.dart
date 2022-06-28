@@ -1,5 +1,5 @@
-import 'package:good_weather/apiclients/places_api_client.dart';
 import 'package:collection/collection.dart';
+import 'package:good_weather/apiclients/places_api_client.dart';
 
 import '../dtos/places/place_details/place_details_data_dto.dart';
 import '../dtos/places/place_id/maps_geocode_data_dto.dart';

@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'result_dto.dart';
 
-
 part 'place_details_data_dto.g.dart';
 
 @JsonSerializable()

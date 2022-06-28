@@ -1,6 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'adress_component_dto.dart';
 import 'geometry_dto.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'result_dto.g.dart';
 

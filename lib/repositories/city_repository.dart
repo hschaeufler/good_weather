@@ -6,6 +6,7 @@ import 'package:good_weather/mapper/dto_to_city_mapper.dart';
 import 'package:good_weather/mapper/entity_to_city_mapper.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/repositories/i_city_repository.dart';
+
 import '../apiclients/geolocation_api_client.dart';
 import '../models/coordinate.dart';
 import '../persistance/weather_database.dart';

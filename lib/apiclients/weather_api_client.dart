@@ -1,8 +1,10 @@
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import '../dtos/weather/current/weather_data_dto.dart';
 import '../dtos/weather/forecast/one_call_weather_data_dto.dart';
 import '../utils/environment.dart';
-import 'package:http/http.dart' as http;
 
 class WeatherAPIClient {
 

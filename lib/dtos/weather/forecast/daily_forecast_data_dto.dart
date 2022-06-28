@@ -1,6 +1,6 @@
-import 'feels_like_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'feels_like_dto.dart';
 import 'temperature_dto.dart';
 import 'weather_dto.dart';
 

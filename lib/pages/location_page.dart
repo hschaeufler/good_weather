@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/services/weather_service.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
+
 import '../models/city.dart';
 
 class LocationPage extends StatefulWidget {
