@@ -12,15 +12,21 @@ class DailyForecastDataDTO {
   final int sunrise;
   final int sunset;
   final int moonrise;
-  final int moonset;
-  final double moon_phase;
+  @JsonKey(name: "moonset")
+  final int moonSet;
+  @JsonKey(name: "moon_phase")
+  final double moonPhase;
   final TemperatureDTO temp;
-  final FeelsLikeDTO feels_like;
+  @JsonKey(name: "feels_like")
+  final FeelsLikeDTO feelsLike;
   final int pressure;
   final int humidity;
-  final double dew_point;
-  final double wind_speed;
-  final int wind_deg;
+  @JsonKey(name: "dew_point")
+  final double dewPoint;
+  @JsonKey(name: "wind_speed")
+  final double windSpeed;
+  @JsonKey(name: "wind_deg")
+  final int windDeg;
   final List<WeatherDTO> weather;
   final int clouds;
   final double pop;
@@ -33,15 +39,15 @@ class DailyForecastDataDTO {
       required this.sunrise,
       required this.sunset,
       required this.moonrise,
-      required this.moonset,
-      required this.moon_phase,
+      required this.moonSet,
+      required this.moonPhase,
       required this.temp,
-      required this.feels_like,
+      required this.feelsLike,
       required this.pressure,
       required this.humidity,
-      required this.dew_point,
-      required this.wind_speed,
-      required this.wind_deg,
+      required this.dewPoint,
+      required this.windSpeed,
+      required this.windDeg,
       required this.weather,
       required this.clouds,
       required this.pop,

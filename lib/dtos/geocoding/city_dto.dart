@@ -5,7 +5,8 @@ part 'city_dto.g.dart';
 @JsonSerializable()
 class CityDTO {
   final String name;
-  final Map<String, String>? local_names;
+  @JsonKey(name: "local_names")
+  final Map<String, String>? localNames;
   final double lat;
   final double lon;
   final String country;
@@ -13,7 +14,7 @@ class CityDTO {
 
   CityDTO({
     required this.name,
-    this.local_names,
+    this.localNames,
     required this.lat,
     required this.lon,
     required this.country,

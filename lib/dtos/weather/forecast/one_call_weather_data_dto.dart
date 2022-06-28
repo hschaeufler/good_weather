@@ -13,7 +13,8 @@ class OneCallWeatherDataDTO {
   final double lon;
   final double lat;
   final String timezone;
-  final int timezone_offset;
+  @JsonKey(name: "timezone_offset")
+  final int timezoneOffset;
   final CurrentWeatherDataDTO current;
   final List<MinutelyDTO>? minutely;
   final List<HourlyForecastDataDTO> hourly;
@@ -24,7 +25,7 @@ class OneCallWeatherDataDTO {
       {required this.lon,
       required this.lat,
       required this.timezone,
-      required this.timezone_offset,
+      required this.timezoneOffset,
       required this.current,
       required this.minutely,
       required this.hourly,
