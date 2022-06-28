@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:good_weather/dtos/weather/teleport/urban_area_images/teleport_urban_area_image_data_dto.dart';
-
-import '../dtos/weather/teleport/location/teleport_location_data_dto.dart';
+import '../dtos/teleport/location/teleport_location_data_dto.dart';
+import '../dtos/teleport/urban_area_images/teleport_urban_area_image_data_dto.dart';
 import '../utils/environment.dart';
 import 'package:http/http.dart';
 

@@ -1,5 +1,5 @@
-import 'package:good_weather/dtos/weather/places/place_id/plus_code_dto.dart';
-import 'package:good_weather/dtos/weather/places/place_id/result_dto.dart';
+import 'plus_code_dto.dart';
+import 'result_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'maps_geocode_data_dto.g.dart';

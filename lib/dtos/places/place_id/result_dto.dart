@@ -1,5 +1,5 @@
-import 'package:good_weather/dtos/weather/places/place_id/adress_component_dto.dart';
-import 'package:good_weather/dtos/weather/places/place_id/geometry_dto.dart';
+import 'adress_component_dto.dart';
+import 'geometry_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'result_dto.g.dart';

@@ -2,8 +2,9 @@ import 'package:good_weather/apiclients/teleport_api_client.dart';
 import 'package:good_weather/mapper/dto_to_city_image_data_mapper.dart';
 import 'package:good_weather/models/city_image_data.dart';
 
-import '../dtos/weather/teleport/location/teleport_location_data_dto.dart';
-import '../dtos/weather/teleport/urban_area_images/teleport_urban_area_image_data_dto.dart';
+import '../dtos/teleport/location/teleport_location_data_dto.dart';
+import '../dtos/teleport/urban_area_images/teleport_urban_area_image_data_dto.dart';
+
 
 class TeleportRepository {
 

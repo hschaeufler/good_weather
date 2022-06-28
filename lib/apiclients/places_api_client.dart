@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:good_weather/dtos/weather/places/place_details/place_details_data_dto.dart';
 
-import '../dtos/weather/places/place_id/maps_geocode_data_dto.dart';
+import '../dtos/places/place_details/place_details_data_dto.dart';
+import '../dtos/places/place_id/maps_geocode_data_dto.dart';
 import '../utils/environment.dart';
 import 'package:http/http.dart';
 

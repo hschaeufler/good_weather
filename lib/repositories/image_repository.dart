@@ -1,7 +1,8 @@
 import 'package:good_weather/apiclients/places_api_client.dart';
-import '../dtos/weather/places/place_details/place_details_data_dto.dart';
-import '../dtos/weather/places/place_id/maps_geocode_data_dto.dart';
 import 'package:collection/collection.dart';
+
+import '../dtos/places/place_details/place_details_data_dto.dart';
+import '../dtos/places/place_id/maps_geocode_data_dto.dart';
 
 class ImageRepository {
 

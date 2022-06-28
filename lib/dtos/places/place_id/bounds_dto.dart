@@ -1,5 +1,7 @@
-import 'package:good_weather/dtos/weather/places/place_id/location_dto.dart';
+
 import 'package:json_annotation/json_annotation.dart';
+
+import 'location_dto.dart';
 
 part 'bounds_dto.g.dart';
 

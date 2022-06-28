@@ -1,6 +1,7 @@
-import 'package:good_weather/dtos/weather/teleport/location/location_nearest_city_dto.dart';
-import 'package:good_weather/dtos/weather/teleport/location/location_nearest_urban_area_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'location_nearest_city_dto.dart';
+import 'location_nearest_urban_area_dto.dart';
 
 
 part 'embedded_dto.g.dart';
