@@ -78,7 +78,6 @@ class CityRepository implements ICityRepository {
   @override
   Future<Coordinate> findLocation() async {
     final Position pos = await GeolocationApiClient.getCurrentPosition();
-    print(pos);
     return Coordinate(lat: pos.latitude, lon: pos.longitude);
   }
 
