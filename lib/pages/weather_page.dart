@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/screens/weather_page_view_screen.dart';

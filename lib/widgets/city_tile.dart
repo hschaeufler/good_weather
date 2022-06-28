@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:good_weather/models/city.dart';
 
 import '../utils/country_code_to_flag.dart';
