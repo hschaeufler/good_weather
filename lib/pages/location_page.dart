@@ -132,7 +132,7 @@ class _LocationPageState extends State<LocationPage> {
         .addCityByLocation()
         .then((id) => GoRouter.of(context).go("/weather/$id"))
         .catchError((error) {
-          print(error);
+          debugPrint(error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error.toString()),

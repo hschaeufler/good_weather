@@ -1,5 +1,6 @@
 
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/repositories/image_repository.dart';
 
@@ -43,11 +44,11 @@ class WeatherService {
   Future<String?> getCityImage(City city) async {
     try {
       final String? image = (await _imageRepository.getImage(city.lon, city.lat)).firstOrNull;
-      print(image);
+      debugPrint(image);
       return image;
     } catch (e, stacktrace) {
-      print("Exception $e");
-      print("StackTrace $stacktrace");
+      debugPrint("Exception $e");
+      debugPrint("StackTrace $stacktrace");
       rethrow;
     }
   }

@@ -34,7 +34,7 @@ class _WeatherPageViewScreenState extends State<WeatherPageViewScreen> {
   @override
   void didUpdateWidget(WeatherPageViewScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget-cwpw");
+    debugPrint("didUpdateWidget-cwpw");
     if (widget.cityId != null) {
       _jumpToCity(widget.cityId!);
     }

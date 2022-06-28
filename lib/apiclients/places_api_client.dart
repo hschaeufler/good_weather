@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 import '../dtos/places/place_details/place_details_data_dto.dart';
@@ -13,9 +14,9 @@ class PlacesApiClient {
       'key' : Environment.mapsApiToken,
       'result_type': 'locality'
     });
-    print(serviceURI.toString());
+    debugPrint(serviceURI.toString());
     final response = await get(serviceURI);
-    print(response.body);
+    debugPrint(response.body);
     if(response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);
       MapsGeocodeDataDto mapsGeocodeDataDto = MapsGeocodeDataDto.fromJson(json);
@@ -31,7 +32,7 @@ class PlacesApiClient {
       'key' : Environment.mapsApiToken,
       'fields': fields
     });
-    print(serviceURI.toString());
+    debugPrint(serviceURI.toString());
     final response = await get(serviceURI);
     if(response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);
