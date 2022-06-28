@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'adress_component_dto.g.dart';
@@ -17,7 +16,7 @@ class AddressComponentDTO {
   String shortName;
   List<String> types;
 
-
-  factory AddressComponentDTO.fromJson(Map<String, dynamic> json) => _$AddressComponentDTOFromJson(json);
+  factory AddressComponentDTO.fromJson(Map<String, dynamic> json) =>
+      _$AddressComponentDTOFromJson(json);
   Map<String, dynamic> toJson() => _$AddressComponentDTOToJson(this);
 }

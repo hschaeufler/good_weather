@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/screens/weather_page_view_screen.dart';
@@ -40,7 +39,10 @@ class _WeatherPageState extends State<WeatherPage> {
             } else if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
               final List<City> cityList = snapshot.data;
-              return WeatherPageViewScreen(cityList: cityList, cityId: widget.cityId,);
+              return WeatherPageViewScreen(
+                cityList: cityList,
+                cityId: widget.cityId,
+              );
             }
             return const Center(child: CircularProgressIndicator());
           },
@@ -74,9 +76,6 @@ class _WeatherPageState extends State<WeatherPage> {
     super.initState();
     _fetchCities();
   }
-
-
-
 
   @override
   void didUpdateWidget(WeatherPage oldWidget) {

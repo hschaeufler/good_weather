@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'plus_code_dto.g.dart';
@@ -15,6 +14,7 @@ class PlusCodeDTO {
   @JsonKey(name: 'global_code')
   String globalCode;
 
-  factory PlusCodeDTO.fromJson(Map<String, dynamic> json) => _$PlusCodeDTOFromJson(json);
+  factory PlusCodeDTO.fromJson(Map<String, dynamic> json) =>
+      _$PlusCodeDTOFromJson(json);
   Map<String, dynamic> toJson() => _$PlusCodeDTOToJson(this);
 }

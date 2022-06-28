@@ -9,9 +9,7 @@ import '../dtos/weather/current/weather_data_dto.dart';
 import '../mapper/dto_to_full_weather_data_mapper.dart';
 import '../models/weather_data.dart';
 
-
 class WeatherRepository implements IWeatherRepository {
-
   WeatherRepository._();
 
   static final WeatherRepository _instance = WeatherRepository._();
@@ -25,16 +23,18 @@ class WeatherRepository implements IWeatherRepository {
 
   @override
   Future<WeatherData> getCurrentWeather(City city) async {
-    final WeatherDataDTO weatherDataDTO = await WeatherAPIClient.getCurrentWeather(city.lon, city.lat);
+    final WeatherDataDTO weatherDataDTO =
+        await WeatherAPIClient.getCurrentWeather(city.lon, city.lat);
     final WeatherData weatherData = _dtoToWeatherDataMapper.map(weatherDataDTO);
     return weatherData;
   }
 
   @override
   Future<FullWeatherData> getFullWeatherData(City city) async {
-     final OneCallWeatherDataDTO oneCallWeatherDataDTO = await WeatherAPIClient.getOneCallWeatherData(city.lon, city.lat);
-    final FullWeatherData fullWeatherData = _dtoToFullWeatherDataMapper.map(oneCallWeatherDataDTO);
+    final OneCallWeatherDataDTO oneCallWeatherDataDTO =
+        await WeatherAPIClient.getOneCallWeatherData(city.lon, city.lat);
+    final FullWeatherData fullWeatherData =
+        _dtoToFullWeatherDataMapper.map(oneCallWeatherDataDTO);
     return fullWeatherData;
   }
-
 }

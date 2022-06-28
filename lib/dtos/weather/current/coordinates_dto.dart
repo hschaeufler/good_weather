@@ -9,6 +9,7 @@ class CoordinatesDTO {
 
   CoordinatesDTO({required this.lon, required this.lat});
 
-  factory CoordinatesDTO.fromJson(Map<String, dynamic> json) => _$CoordinatesDTOFromJson(json);
+  factory CoordinatesDTO.fromJson(Map<String, dynamic> json) =>
+      _$CoordinatesDTOFromJson(json);
   Map<String, dynamic> toJson() => _$CoordinatesDTOToJson(this);
 }

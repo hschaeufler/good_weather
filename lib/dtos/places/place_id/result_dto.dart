@@ -1,6 +1,7 @@
-import 'package:good_weather/dtos/weather/places/place_id/adress_component_dto.dart';
-import 'package:good_weather/dtos/weather/places/place_id/geometry_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'adress_component_dto.dart';
+import 'geometry_dto.dart';
 
 part 'result_dto.g.dart';
 
@@ -14,7 +15,6 @@ class ResultDTO {
     required this.types,
   });
 
-
   @JsonKey(name: 'address_components')
   List<AddressComponentDTO> addressComponents;
   @JsonKey(name: 'formatted_address')
@@ -24,6 +24,7 @@ class ResultDTO {
   String placeId;
   List<String> types;
 
-  factory ResultDTO.fromJson(Map<String, dynamic> json) => _$ResultDTOFromJson(json);
+  factory ResultDTO.fromJson(Map<String, dynamic> json) =>
+      _$ResultDTOFromJson(json);
   Map<String, dynamic> toJson() => _$ResultDTOToJson(this);
 }

@@ -1,7 +1,6 @@
 import 'package:good_weather/models/abstract_weather.dart';
 
 class DailyForecastData extends AbstractWeather {
-
   final double? minTemp;
   final double? maxTemp;
 
@@ -13,9 +12,9 @@ class DailyForecastData extends AbstractWeather {
     this.minTemp,
     this.maxTemp,
   }) : super(
-    dateTime: dateTime,
-    iconName: iconName,
-    description: description,
-    temp: temp,
-  );
+          dateTime: dateTime,
+          iconName: iconName,
+          description: description,
+          temp: temp,
+        );
 }

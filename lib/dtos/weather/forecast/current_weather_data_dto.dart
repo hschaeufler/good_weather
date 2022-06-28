@@ -10,16 +10,21 @@ class CurrentWeatherDataDTO {
   final int sunrise;
   final int sunset;
   final double temp;
-  final double feels_like;
+  @JsonKey(name: "feels_like")
+  final double feelsLike;
   final int pressure;
   final int humidity;
-  final double dew_point;
+  @JsonKey(name: "dew_point")
+  final double dewPoint;
   final double uvi;
   final int clouds;
   final int visibility;
-  final double wind_speed;
-  final double? wind_gust;
-  final int wind_deg;
+  @JsonKey(name: "wind_speed")
+  final double windSpeed;
+  @JsonKey(name: "wind_gust")
+  final double? windGust;
+  @JsonKey(name: "wind_deg")
+  final int windGeg;
   final Map<String, double>? rain;
   final Map<String, double>? snow;
   final List<WeatherDTO> weather;
@@ -29,16 +34,16 @@ class CurrentWeatherDataDTO {
       required this.sunrise,
       required this.sunset,
       required this.temp,
-      required this.feels_like,
+      required this.feelsLike,
       required this.pressure,
       required this.humidity,
-      required this.dew_point,
+      required this.dewPoint,
       required this.uvi,
       required this.clouds,
       required this.visibility,
-      required this.wind_speed,
-      this.wind_gust,
-      required this.wind_deg,
+      required this.windSpeed,
+      this.windGust,
+      required this.windGeg,
       this.rain,
       this.snow,
       required this.weather});

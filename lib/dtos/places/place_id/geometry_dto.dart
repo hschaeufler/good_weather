@@ -1,6 +1,7 @@
-import 'package:good_weather/dtos/weather/places/place_id/bounds_dto.dart';
-import 'package:good_weather/dtos/weather/places/place_id/location_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'bounds_dto.dart';
+import 'location_dto.dart';
 
 part 'geometry_dto.g.dart';
 
@@ -19,6 +20,7 @@ class GeometryDTO {
   String locationType;
   BoundsDTO viewport;
 
-  factory GeometryDTO.fromJson(Map<String, dynamic> json) => _$GeometryDTOFromJson(json);
+  factory GeometryDTO.fromJson(Map<String, dynamic> json) =>
+      _$GeometryDTOFromJson(json);
   Map<String, dynamic> toJson() => _$GeometryDTOToJson(this);
 }

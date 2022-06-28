@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'system_dto.g.dart';
@@ -12,14 +11,15 @@ class SystemDTO {
   final int sunrise;
   final int sunset;
 
-  SystemDTO({
-    required this.type,
-    required this.id,
-    required this.message,
-    required this.country,
-    required this.sunrise,
-    required this.sunset});
+  SystemDTO(
+      {required this.type,
+      required this.id,
+      required this.message,
+      required this.country,
+      required this.sunrise,
+      required this.sunset});
 
-  factory SystemDTO.fromJson(Map<String, dynamic> json) => _$SystemDTOFromJson(json);
+  factory SystemDTO.fromJson(Map<String, dynamic> json) =>
+      _$SystemDTOFromJson(json);
   Map<String, dynamic> toJson() => _$SystemDTOToJson(this);
 }

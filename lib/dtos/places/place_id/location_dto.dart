@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'location_dto.g.dart';
@@ -13,6 +12,7 @@ class LocationDTO {
   double lat;
   double lng;
 
-  factory LocationDTO.fromJson(Map<String, dynamic> json) => _$LocationDTOFromJson(json);
+  factory LocationDTO.fromJson(Map<String, dynamic> json) =>
+      _$LocationDTOFromJson(json);
   Map<String, dynamic> toJson() => _$LocationDTOToJson(this);
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ParallaxFlowDelegate extends FlowDelegate {
@@ -19,15 +18,14 @@ class ParallaxFlowDelegate extends FlowDelegate {
     double height = context.size.height;
     double pixels = scrollFraction * (height / 10);
 
-      // Paint the background.
-      context.paintChild(
-        0,
-        transform: Transform.translate(
-          offset: Offset(0, pixels),
-        ).transform,
-        opacity: opacity,
-      );
-
+    // Paint the background.
+    context.paintChild(
+      0,
+      transform: Transform.translate(
+        offset: Offset(0, pixels),
+      ).transform,
+      opacity: opacity,
+    );
   }
 
   @override
