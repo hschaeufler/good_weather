@@ -1,5 +1,4 @@
 class CityImageData {
-
   CityImageData({
     required this.mobile,
     required this.web,

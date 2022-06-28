@@ -15,6 +15,7 @@ class WeatherDTO {
       required this.description,
       required this.icon});
 
-  factory WeatherDTO.fromJson(Map<String, dynamic> json) => _$WeatherDTOFromJson(json);
+  factory WeatherDTO.fromJson(Map<String, dynamic> json) =>
+      _$WeatherDTOFromJson(json);
   Map<String, dynamic> toJson() => _$WeatherDTOToJson(this);
 }

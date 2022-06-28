@@ -9,8 +9,8 @@ class DtoToWeatherDataMapper implements IMapper<WeatherDataDTO, WeatherData> {
       iconName: source.weather[0].icon,
       description: source.weather[0].description,
       temp: source.main.temp,
-      minTemp: source.main.temp_min,
-      maxTemp: source.main.temp_max,
+      minTemp: source.main.tempMin,
+      maxTemp: source.main.tempMax,
       cityName: source.name,
     );
   }

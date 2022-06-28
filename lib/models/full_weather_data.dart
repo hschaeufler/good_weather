@@ -1,5 +1,5 @@
-import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/abstract_weather.dart';
+import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/hourly_forecast_data.dart';
 
 class FullWeatherData extends AbstractWeather {
@@ -14,9 +14,9 @@ class FullWeatherData extends AbstractWeather {
     required this.dailyForecast,
     required this.hourlyForecast,
   }) : super(
-    dateTime: dateTime,
-    iconName: iconName,
-    description: description,
-    temp: temp,
-  );
+          dateTime: dateTime,
+          iconName: iconName,
+          description: description,
+          temp: temp,
+        );
 }

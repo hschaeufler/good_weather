@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'photo_dto.g.dart';
@@ -19,6 +18,7 @@ class PhotoDTO {
   String photoReference;
   int width;
 
-  factory PhotoDTO.fromJson(Map<String, dynamic> json) => _$PhotoDTOFromJson(json);
+  factory PhotoDTO.fromJson(Map<String, dynamic> json) =>
+      _$PhotoDTOFromJson(json);
   Map<String, dynamic> toJson() => _$PhotoDTOToJson(this);
 }

@@ -4,7 +4,8 @@ part 'alert_dto.g.dart';
 
 @JsonSerializable()
 class AlertDTO {
-  final String sender_name;
+  @JsonKey(name: "sender_name")
+  final String senderName;
   final String event;
   final int start;
   final int end;
@@ -12,7 +13,7 @@ class AlertDTO {
   final List<String> tags;
 
   AlertDTO(
-      {required this.sender_name,
+      {required this.senderName,
       required this.event,
       required this.start,
       required this.end,

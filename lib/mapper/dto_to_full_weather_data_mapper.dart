@@ -1,4 +1,3 @@
-import 'package:good_weather/dtos/weather/current/weather_data_dto.dart';
 import 'package:good_weather/dtos/weather/forecast/one_call_weather_data_dto.dart';
 import 'package:good_weather/mapper/dto_to_daily_forecast_data_mapper.dart';
 import 'package:good_weather/mapper/dto_to_hourly_forecast_data_mapper.dart';
@@ -6,16 +5,15 @@ import 'package:good_weather/mapper/i_mapper.dart';
 import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/full_weather_data.dart';
 import 'package:good_weather/models/hourly_forecast_data.dart';
-import 'package:good_weather/models/weather_data.dart';
 
 import '../utils/date_utils.dart';
 
-class DtoToFullWeatherDataMappper implements IMapper<OneCallWeatherDataDTO, FullWeatherData> {
+class DtoToFullWeatherDataMappper
+    implements IMapper<OneCallWeatherDataDTO, FullWeatherData> {
   final DTOtoDailyForecastDataMapper _dtoToDailyForecastDataMapper =
       DTOtoDailyForecastDataMapper();
   final DTOtoHourlyForecastDataMapper _dtoToHourlyForecastDataMapper =
-  DTOtoHourlyForecastDataMapper();
-
+      DTOtoHourlyForecastDataMapper();
 
   @override
   FullWeatherData map(OneCallWeatherDataDTO source) {

@@ -9,6 +9,7 @@ class WindDTO {
 
   WindDTO({required this.speed, required this.deg});
 
-  factory WindDTO.fromJson(Map<String, dynamic> json) => _$WindDTOFromJson(json);
+  factory WindDTO.fromJson(Map<String, dynamic> json) =>
+      _$WindDTOFromJson(json);
   Map<String, dynamic> toJson() => _$WindDTOToJson(this);
 }

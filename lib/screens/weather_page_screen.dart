@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:good_weather/screens/parallax_flow_delegate.dart';
 import 'package:good_weather/models/city.dart';
 import 'package:good_weather/models/full_weather_data.dart';
+import 'package:good_weather/screens/parallax_flow_delegate.dart';
 import 'package:good_weather/widgets/daily_forecast_list_view.dart';
 import 'package:good_weather/widgets/hourly_forecast_list_view.dart';
 

@@ -12,7 +12,7 @@ OneCallWeatherDataDTO _$OneCallWeatherDataDTOFromJson(
       lon: (json['lon'] as num).toDouble(),
       lat: (json['lat'] as num).toDouble(),
       timezone: json['timezone'] as String,
-      timezone_offset: json['timezone_offset'] as int,
+      timezoneOffset: json['timezone_offset'] as int,
       current: CurrentWeatherDataDTO.fromJson(
           json['current'] as Map<String, dynamic>),
       minutely: (json['minutely'] as List<dynamic>?)
@@ -35,7 +35,7 @@ Map<String, dynamic> _$OneCallWeatherDataDTOToJson(
       'lon': instance.lon,
       'lat': instance.lat,
       'timezone': instance.timezone,
-      'timezone_offset': instance.timezone_offset,
+      'timezone_offset': instance.timezoneOffset,
       'current': instance.current,
       'minutely': instance.minutely,
       'hourly': instance.hourly,

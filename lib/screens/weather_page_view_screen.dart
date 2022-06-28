@@ -34,7 +34,7 @@ class _WeatherPageViewScreenState extends State<WeatherPageViewScreen> {
   @override
   void didUpdateWidget(WeatherPageViewScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget-cwpw");
+    debugPrint("didUpdateWidget-cwpw");
     if (widget.cityId != null) {
       _jumpToCity(widget.cityId!);
     }
@@ -46,9 +46,9 @@ class _WeatherPageViewScreenState extends State<WeatherPageViewScreen> {
     super.dispose();
   }
 
-  void _jumpToCity(int cityId){
+  void _jumpToCity(int cityId) {
     int index = widget.cityList.indexWhere((city) => city.id == cityId);
-    if(_controller.hasClients) {
+    if (_controller.hasClients) {
       _controller.jumpToPage(index);
     }
   }

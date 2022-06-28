@@ -8,7 +8,7 @@ part of 'city_dto.dart';
 
 CityDTO _$CityDTOFromJson(Map<String, dynamic> json) => CityDTO(
       name: json['name'] as String,
-      local_names: (json['local_names'] as Map<String, dynamic>?)?.map(
+      localNames: (json['local_names'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),
       lat: (json['lat'] as num).toDouble(),
@@ -19,7 +19,7 @@ CityDTO _$CityDTOFromJson(Map<String, dynamic> json) => CityDTO(
 
 Map<String, dynamic> _$CityDTOToJson(CityDTO instance) => <String, dynamic>{
       'name': instance.name,
-      'local_names': instance.local_names,
+      'local_names': instance.localNames,
       'lat': instance.lat,
       'lon': instance.lon,
       'country': instance.country,

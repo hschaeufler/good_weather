@@ -7,7 +7,7 @@ part of 'alert_dto.dart';
 // **************************************************************************
 
 AlertDTO _$AlertDTOFromJson(Map<String, dynamic> json) => AlertDTO(
-      sender_name: json['sender_name'] as String,
+      senderName: json['sender_name'] as String,
       event: json['event'] as String,
       start: json['start'] as int,
       end: json['end'] as int,
@@ -16,7 +16,7 @@ AlertDTO _$AlertDTOFromJson(Map<String, dynamic> json) => AlertDTO(
     );
 
 Map<String, dynamic> _$AlertDTOToJson(AlertDTO instance) => <String, dynamic>{
-      'sender_name': instance.sender_name,
+      'sender_name': instance.senderName,
       'event': instance.event,
       'start': instance.start,
       'end': instance.end,

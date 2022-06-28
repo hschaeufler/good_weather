@@ -1,5 +1,6 @@
-import 'package:good_weather/dtos/weather/places/place_id/location_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'location_dto.dart';
 
 part 'bounds_dto.g.dart';
 
@@ -13,6 +14,7 @@ class BoundsDTO {
   LocationDTO northeast;
   LocationDTO southwest;
 
-  factory BoundsDTO.fromJson(Map<String, dynamic> json) => _$BoundsDTOFromJson(json);
+  factory BoundsDTO.fromJson(Map<String, dynamic> json) =>
+      _$BoundsDTOFromJson(json);
   Map<String, dynamic> toJson() => _$BoundsDTOToJson(this);
 }

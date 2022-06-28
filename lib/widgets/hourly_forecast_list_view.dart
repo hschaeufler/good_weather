@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:good_weather/models/daily_forecast_data.dart';
 import 'package:good_weather/models/hourly_forecast_data.dart';
-import 'package:good_weather/widgets/daily_forecast_tile.dart';
 import 'package:good_weather/widgets/hourly_forecast_tile.dart';
 
 class HourlyForecastListView extends StatelessWidget {

@@ -1,3 +1,3 @@
-abstract class IMapper<S,T> {
+abstract class IMapper<S, T> {
   T map(S source);
 }

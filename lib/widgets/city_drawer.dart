@@ -7,12 +7,13 @@ typedef OnCitySelectedCallback = void Function(City city);
 typedef OnCityDeleteCallback = void Function(City city);
 
 class CityDrawer extends StatelessWidget {
-
   final OnCitySelectedCallback? onCitySelected;
   final OnCityDeleteCallback? onCityDeleted;
   final Future<List<City>>? cityList;
 
-  const CityDrawer({ this.cityList, this.onCitySelected, this.onCityDeleted, Key? key}) : super(key: key);
+  const CityDrawer(
+      {this.cityList, this.onCitySelected, this.onCityDeleted, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

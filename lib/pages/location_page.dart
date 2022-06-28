@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:good_weather/services/weather_service.dart';
 import 'package:good_weather/utils/country_code_to_flag.dart';
+
 import '../models/city.dart';
 
 class LocationPage extends StatefulWidget {
@@ -54,8 +55,8 @@ class _LocationPageState extends State<LocationPage> {
               if (futureCityList != null)
                 FutureBuilder(
                   future: futureCityList,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<List<City>> snapshot) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<City>> snapshot) {
                     if (snapshot.hasError) {
                       return const Text('Ein Fehler ist aufgetreten');
                     } else if (snapshot.hasData &&
@@ -131,7 +132,7 @@ class _LocationPageState extends State<LocationPage> {
         .addCityByLocation()
         .then((id) => GoRouter.of(context).go("/weather/$id"))
         .catchError((error) {
-          print(error);
+      debugPrint(error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error.toString()),
