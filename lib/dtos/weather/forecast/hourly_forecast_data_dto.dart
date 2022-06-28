@@ -28,7 +28,7 @@ class HourlyForecastDataDTO {
   final List<WeatherDTO> weather;
 
   HourlyForecastDataDTO(
-  {required this.dt,
+      {required this.dt,
       required this.temp,
       required this.feelsLike,
       required this.pressure,

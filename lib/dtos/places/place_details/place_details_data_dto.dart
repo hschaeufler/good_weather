@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'result_dto.dart';
@@ -18,6 +17,7 @@ class PlaceDetailsDataDto {
   ResultDTO result;
   String status;
 
-  factory PlaceDetailsDataDto.fromJson(Map<String, dynamic> json) => _$PlaceDetailsDataDtoFromJson(json);
+  factory PlaceDetailsDataDto.fromJson(Map<String, dynamic> json) =>
+      _$PlaceDetailsDataDtoFromJson(json);
   Map<String, dynamic> toJson() => _$PlaceDetailsDataDtoToJson(this);
 }

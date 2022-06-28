@@ -8,12 +8,12 @@ import 'package:good_weather/models/hourly_forecast_data.dart';
 
 import '../utils/date_utils.dart';
 
-class DtoToFullWeatherDataMappper implements IMapper<OneCallWeatherDataDTO, FullWeatherData> {
+class DtoToFullWeatherDataMappper
+    implements IMapper<OneCallWeatherDataDTO, FullWeatherData> {
   final DTOtoDailyForecastDataMapper _dtoToDailyForecastDataMapper =
       DTOtoDailyForecastDataMapper();
   final DTOtoHourlyForecastDataMapper _dtoToHourlyForecastDataMapper =
-  DTOtoHourlyForecastDataMapper();
-
+      DTOtoHourlyForecastDataMapper();
 
   @override
   FullWeatherData map(OneCallWeatherDataDTO source) {

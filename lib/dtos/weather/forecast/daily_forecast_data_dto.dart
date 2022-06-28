@@ -52,8 +52,8 @@ class DailyForecastDataDTO {
       required this.clouds,
       required this.pop,
       required this.uvi,
-        this.rain,
-        this.snow});
+      this.rain,
+      this.snow});
 
   factory DailyForecastDataDTO.fromJson(Map<String, dynamic> json) =>
       _$DailyForecastDataDTOFromJson(json);

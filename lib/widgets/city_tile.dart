@@ -8,7 +8,8 @@ class CityTile extends StatelessWidget {
   final GestureTapCallback? onTap;
   final Widget? trailing;
 
-  const CityTile({required this.city, this.onTap, this.trailing, Key? key}) : super(key: key);
+  const CityTile({required this.city, this.onTap, this.trailing, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

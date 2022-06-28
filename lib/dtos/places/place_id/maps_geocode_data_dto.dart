@@ -15,6 +15,7 @@ class MapsGeocodeDataDto {
   MapsGeocodeDataDto(
       {required this.plusCode, required this.results, required this.status});
 
-  factory MapsGeocodeDataDto.fromJson(Map<String, dynamic> json) => _$MapsGeocodeDataDtoFromJson(json);
+  factory MapsGeocodeDataDto.fromJson(Map<String, dynamic> json) =>
+      _$MapsGeocodeDataDtoFromJson(json);
   Map<String, dynamic> toJson() => _$MapsGeocodeDataDtoToJson(this);
 }

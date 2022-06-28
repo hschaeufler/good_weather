@@ -14,9 +14,9 @@ class FullWeatherData extends AbstractWeather {
     required this.dailyForecast,
     required this.hourlyForecast,
   }) : super(
-    dateTime: dateTime,
-    iconName: iconName,
-    description: description,
-    temp: temp,
-  );
+          dateTime: dateTime,
+          iconName: iconName,
+          description: description,
+          temp: temp,
+        );
 }

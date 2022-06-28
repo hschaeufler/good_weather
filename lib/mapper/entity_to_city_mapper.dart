@@ -3,7 +3,6 @@ import 'package:good_weather/models/city.dart';
 import 'package:good_weather/persistance/weather_database.dart';
 
 class EntityToCityMapper implements IMapper<CityEntityData, City> {
-
   @override
   City map(CityEntityData source) {
     return City(

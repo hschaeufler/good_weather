@@ -11,9 +11,7 @@ import '../apiclients/geolocation_api_client.dart';
 import '../models/coordinate.dart';
 import '../persistance/weather_database.dart';
 
-
 class CityRepository implements ICityRepository {
-
   CityRepository._();
 
   static final CityRepository _instance = CityRepository._();
@@ -21,7 +19,6 @@ class CityRepository implements ICityRepository {
   factory CityRepository() {
     return _instance;
   }
-
 
   final _dao = WeatherDatabase().cityDAO;
   final _cityToEntityMapper = CityToEntityMapper();
@@ -46,25 +43,28 @@ class CityRepository implements ICityRepository {
   Future<City> getById(int id) async {
     City? city;
     CityEntityData? cityEntity = await _dao.getById(id);
-    if(cityEntity == null) {
+    if (cityEntity == null) {
       throw Exception("No City for this id");
     }
     city = _entityToCityMapper.map(cityEntity);
     return city;
   }
 
-
   @override
   Future<List<City>> findCityByName(String cityName) async {
-    final List<CityDTO> cityDTOList = await GeocodingAPIClient.getCityCoordinates(cityName);
-    final List<City> cityList = cityDTOList.map((e) => _dtoToCityMapper.map(e)).toList();
+    final List<CityDTO> cityDTOList =
+        await GeocodingAPIClient.getCityCoordinates(cityName);
+    final List<City> cityList =
+        cityDTOList.map((e) => _dtoToCityMapper.map(e)).toList();
     return cityList;
   }
 
   Future<City> findCityByCoordinates(double lat, double lon) async {
-    final List<CityDTO> cityDTOList = await GeocodingAPIClient.getCityFromCoordinates(lat, lon, limit: 1);
-    final List<City> cityList = cityDTOList.map((e) => _dtoToCityMapper.map(e)).toList();
-    if(cityList.isEmpty) {
+    final List<CityDTO> cityDTOList =
+        await GeocodingAPIClient.getCityFromCoordinates(lat, lon, limit: 1);
+    final List<City> cityList =
+        cityDTOList.map((e) => _dtoToCityMapper.map(e)).toList();
+    if (cityList.isEmpty) {
       return Future.error("No Cities found for Location!");
     }
     return cityList[0];
@@ -89,11 +89,9 @@ class CityRepository implements ICityRepository {
 
   @override
   Future<int> deleteCity(City city) {
-    if(city.id == null) {
+    if (city.id == null) {
       throw Exception("Only Citys with Id, can get deleted!");
     }
     return _dao.deleteById(city.id!);
   }
-
-
 }

@@ -12,15 +12,15 @@ class CityDTO {
   final String country;
   final String? state;
 
-  CityDTO({
-    required this.name,
-    this.localNames,
-    required this.lat,
-    required this.lon,
-    required this.country,
-    this.state
-  });
+  CityDTO(
+      {required this.name,
+      this.localNames,
+      required this.lat,
+      required this.lon,
+      required this.country,
+      this.state});
 
-  factory CityDTO.fromJson(Map<String, dynamic> json) => _$CityDTOFromJson(json);
+  factory CityDTO.fromJson(Map<String, dynamic> json) =>
+      _$CityDTOFromJson(json);
   Map<String, dynamic> toJson() => _$CityDTOToJson(this);
 }

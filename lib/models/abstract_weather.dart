@@ -4,10 +4,9 @@ abstract class AbstractWeather {
   final String description;
   final double temp;
 
-  AbstractWeather({
-    required this.dateTime,
-    required this.iconName,
-    required this.description,
-    required this.temp
-  });
+  AbstractWeather(
+      {required this.dateTime,
+      required this.iconName,
+      required this.description,
+      required this.temp});
 }

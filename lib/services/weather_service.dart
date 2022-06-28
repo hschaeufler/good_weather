@@ -1,4 +1,3 @@
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:good_weather/models/full_weather_data.dart';
@@ -10,7 +9,6 @@ import '../repositories/city_repository.dart';
 import '../repositories/weather_repository.dart';
 
 class WeatherService {
-
   WeatherService._();
 
   static final WeatherService _instance = WeatherService._();
@@ -43,7 +41,8 @@ class WeatherService {
 
   Future<String?> getCityImage(City city) async {
     try {
-      final String? image = (await _imageRepository.getImage(city.lon, city.lat)).firstOrNull;
+      final String? image =
+          (await _imageRepository.getImage(city.lon, city.lat)).firstOrNull;
       debugPrint(image);
       return image;
     } catch (e, stacktrace) {

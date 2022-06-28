@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 class City {
@@ -11,13 +10,12 @@ class City {
   final String country;
   final String? state;
 
-  City({
-    this.id,
-    required this.name,
-    this.localNames,
-    required this.lat,
-    required this.lon,
-    required this.country,
-    this.state
-  });
+  City(
+      {this.id,
+      required this.name,
+      this.localNames,
+      required this.lat,
+      required this.lon,
+      required this.country,
+      this.state});
 }

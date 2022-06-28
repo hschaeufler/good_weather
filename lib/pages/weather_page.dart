@@ -39,7 +39,10 @@ class _WeatherPageState extends State<WeatherPage> {
             } else if (snapshot.hasData &&
                 snapshot.connectionState == ConnectionState.done) {
               final List<City> cityList = snapshot.data;
-              return WeatherPageViewScreen(cityList: cityList, cityId: widget.cityId,);
+              return WeatherPageViewScreen(
+                cityList: cityList,
+                cityId: widget.cityId,
+              );
             }
             return const Center(child: CircularProgressIndicator());
           },
@@ -73,9 +76,6 @@ class _WeatherPageState extends State<WeatherPage> {
     super.initState();
     _fetchCities();
   }
-
-
-
 
   @override
   void didUpdateWidget(WeatherPage oldWidget) {

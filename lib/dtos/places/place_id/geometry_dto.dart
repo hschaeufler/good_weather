@@ -20,6 +20,7 @@ class GeometryDTO {
   String locationType;
   BoundsDTO viewport;
 
-  factory GeometryDTO.fromJson(Map<String, dynamic> json) => _$GeometryDTOFromJson(json);
+  factory GeometryDTO.fromJson(Map<String, dynamic> json) =>
+      _$GeometryDTOFromJson(json);
   Map<String, dynamic> toJson() => _$GeometryDTOToJson(this);
 }

@@ -8,16 +8,18 @@ import '../dtos/places/place_id/maps_geocode_data_dto.dart';
 import '../utils/environment.dart';
 
 class PlacesApiClient {
-  static Future<MapsGeocodeDataDto> getPlaceId(double longitude, double latitude) async {
-    final serviceURI = Uri.https(Environment.mapsApiEndpoint, Environment.mapsGecodeApiPath, {
-      'latlng' : '$latitude,$longitude',
-      'key' : Environment.mapsApiToken,
+  static Future<MapsGeocodeDataDto> getPlaceId(
+      double longitude, double latitude) async {
+    final serviceURI =
+        Uri.https(Environment.mapsApiEndpoint, Environment.mapsGecodeApiPath, {
+      'latlng': '$latitude,$longitude',
+      'key': Environment.mapsApiToken,
       'result_type': 'locality'
     });
     debugPrint(serviceURI.toString());
     final response = await get(serviceURI);
     debugPrint(response.body);
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);
       MapsGeocodeDataDto mapsGeocodeDataDto = MapsGeocodeDataDto.fromJson(json);
       return mapsGeocodeDataDto;
@@ -26,29 +28,34 @@ class PlacesApiClient {
     }
   }
 
-  static Future<PlaceDetailsDataDto> getPlaceDetails(String placeId, {fields = 'photo'}) async {
-    final serviceURI = Uri.https(Environment.mapsApiEndpoint, Environment.mapsPlaceDetailsApiPath, {
-      'place_id' : placeId,
-      'key' : Environment.mapsApiToken,
+  static Future<PlaceDetailsDataDto> getPlaceDetails(String placeId,
+      {fields = 'photo'}) async {
+    final serviceURI = Uri.https(
+        Environment.mapsApiEndpoint, Environment.mapsPlaceDetailsApiPath, {
+      'place_id': placeId,
+      'key': Environment.mapsApiToken,
       'fields': fields
     });
     debugPrint(serviceURI.toString());
     final response = await get(serviceURI);
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final Map<String, dynamic> json = jsonDecode(response.body);
-      PlaceDetailsDataDto placeDetailsDataDto = PlaceDetailsDataDto.fromJson(json);
+      PlaceDetailsDataDto placeDetailsDataDto =
+          PlaceDetailsDataDto.fromJson(json);
       return placeDetailsDataDto;
     } else {
       throw Exception("Webservice-Fault " + response.body);
     }
   }
 
-  static String getPlacePhotoURL(String photoReference, {maxwidth = 1200, maxheight = 1200}) {
-    final serviceURI = Uri.https(Environment.mapsApiEndpoint, Environment.mapsPhotoApiPath, {
-      'photo_reference' : photoReference,
-      'key' : Environment.mapsApiToken,
+  static String getPlacePhotoURL(String photoReference,
+      {maxwidth = 1200, maxheight = 1200}) {
+    final serviceURI =
+        Uri.https(Environment.mapsApiEndpoint, Environment.mapsPhotoApiPath, {
+      'photo_reference': photoReference,
+      'key': Environment.mapsApiToken,
       'maxwidth': maxwidth.toString(),
-      'maxheight' : maxheight.toString(),
+      'maxheight': maxheight.toString(),
     });
     return serviceURI.toString();
   }

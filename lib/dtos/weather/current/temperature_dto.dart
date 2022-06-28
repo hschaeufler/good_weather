@@ -22,6 +22,7 @@ class TemperatureDTO {
       required this.pressure,
       required this.humidity});
 
-  factory TemperatureDTO.fromJson(Map<String, dynamic> json) => _$TemperatureDTOFromJson(json);
+  factory TemperatureDTO.fromJson(Map<String, dynamic> json) =>
+      _$TemperatureDTOFromJson(json);
   Map<String, dynamic> toJson() => _$TemperatureDTOToJson(this);
 }
